@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic" rel="stylesheet">
+  <title>Log into JAM</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a class="active" href="./index.html">Home</a>
+    <div class="right">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./dashboard.html">Test</a>
+    </div>
+  </nav>
+
+  <div class="login">
+    <div>
+      <!-- JAM Logo -->
+      <img src="Resources/assets/logo.png" alt="JAM Logo" width="250" height="250">
+
+      <h1>Log into your Account</h1>
+
+      <!-- Login Form -->
+      <form class="login-form">
+        <!-- Input Email Address -->
+        <div>
+          <label for="input-email" class="required">Email Address</label>
+          <input type="text" id="input-email" required>
+        </div>
+        <!-- Input Password -->
+        <div>
+          <label for="input-password" class="required">Password</label>
+          <input type="password" id="input-password" required>
+        </div>
+        <!-- Login Button -->
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Register Prompt -->
+      <h4>Don't have an account?</h4>
+      <a href="register.html"><b>Register →</b></a>
+    </div>
+  </div>
+</body>
+</html>

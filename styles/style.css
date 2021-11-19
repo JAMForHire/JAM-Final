@@ -1,0 +1,410 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre&family=Roboto&display=swap');
+
+/* Html body behavior */
+html, body {
+  margin: 0px;
+  padding: 0px;
+
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+nav {
+  background-color: #555;
+  overflow: hidden;
+  width: 100%;
+
+  /* Set flex so row */
+  display: flex;
+  font-family: 'Gemunu Libre', sans-serif;
+}
+
+/* Defaul nav links */
+nav a {
+  /* Remove default link */
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 19px;
+}
+
+/* Navbar right portion */
+nav div.right {
+  /* Shift info to the end of flex box */
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+/* Nav links hover */
+nav a:hover {
+  /* Lighten color on hover */
+  background-color: #ddd;
+  color: black;
+}
+
+/* Nav active links */
+nav a.active {
+  /* Once link is active show blue color */
+  background-color: #B585F8;
+  color: white;
+}
+
+/* Underline accent */
+div.accent {
+  /* Sizing */
+  width: 40%;
+  height: 2vh;
+
+  /* Border */
+  border-radius: 2.5em;
+
+  /* Color */
+  background-color: #B585F8;
+}
+
+/* Custom button */
+.btn-jam {
+  background-color: #B585F8 !important;
+}
+
+.btn-jam:hover {
+  background-color: #8064A2 !important;
+}
+
+/* Chevron Styling */
+img.chevron {
+  /* Sizing */
+  width: 4%;
+  cursor: pointer;
+}
+
+/* Login and register outer box */
+.login, .register {
+  /* flex */
+  display: flex;
+  justify-content: center;
+
+  /* Text styling */
+  text-align: center;
+  font-family: 'Roboto', 'Cyrillic', sans-serif;
+}
+
+/* Image sizing */
+.main_img {
+  width: 55%;
+  margin-bottom: 10%;
+}
+
+/* More image sizing */
+.main_img_2 {
+  width: 55%;
+  margin-bottom: 15%;
+}
+
+/* Login screen height */
+.login {
+  height: 105vh;
+}
+
+/* Register screen height */
+.register {
+  height: 140vh;
+}
+
+/* Login and register headings */
+.login h1, .register h1 {
+  /* Shifting */
+  margin-top: -3%;
+}
+
+/* Login and register headings */
+.login h4, .register h4 {
+  /* Shifting */
+  margin-bottom: 2%;
+}
+
+/* Login link styling */
+.login a, .register a {
+  /* Text styling */
+  color: #55D5FF;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Login general styling */
+.login .login-form {
+  /* Text styling */
+  text-align: left;
+  /* Sizing */
+  width: 125%;
+  /* Shifting */
+  margin-left: -12.5%;
+}
+
+/* Register general styling */
+.register .login-form {
+  /* Text */
+  text-align: left;
+  /* Size */
+  width: 90%;
+  /* Shift */
+  margin-left: 5%;
+}
+
+/* Login form styling */
+.login-form .inline-fields {
+  /* Flex styling */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+/* Login form margins */
+.login-form .fix-margin {
+  /* Shifting */
+  margin-right: -1%;
+}
+
+/* Login form size of content */
+.login-form .inline-fields div {
+  width: 45%;
+}
+
+/* Label styling for login */
+.login-form label {
+  font-size: 13px;
+}
+
+/* Styling for Form Input Fields*/
+.login-form input[type=text], input[type=password], input[type=date], select {
+  width: 100%;
+  display: block;
+  border: 1px solid #a1a1a1;
+  margin: 1% 0 4% 0;
+  height: 4vh;
+  padding: 1%;
+}
+
+/* Styling for Form Date Picker*/
+.login-form input[type=date]::-webkit-datetime-edit {
+  font-family: 'Roboto', 'Cyrillic', sans-serif;
+  padding: 1%;
+}
+
+/* Styling for Form File Upload */
+.login-form input[type=file] {
+  margin: 1% 0 4% 0;
+  font-family: 'Roboto', 'Cyrillic', sans-serif;
+}
+
+/* Login input stylings */
+.login-form input[type=file]::-webkit-file-upload-button {
+  /* Colors */
+  background-color: #B585F8;
+  color: white;
+  border: 2px solid #c7a7f3;
+  /* Size */
+  height: 4.25vh;
+  border-radius: 10px;
+}
+
+/* Login input hover styling */
+.login-form input[type=file]::-webkit-file-upload-button:hover {
+  background-color: #9c73d6;
+  cursor: pointer;
+}
+
+.login-form input[type=file]::-webkit-file-upload-button:active {
+  background-color: #8a65bd;
+}
+
+/* Styling for Form Submit Button*/
+.login-form button[type=submit] {
+  width: 40%;
+  margin: 5% 30%;
+  color: white;
+  background-color: #B585F8;
+  height: 7vh;
+  border: none;
+  font-size: 20px;
+}
+
+/* Login form submit button hover */
+.login-form button[type=submit]:hover {
+  background-color: #be95f8;
+  cursor: pointer;
+}
+
+/* Styling for Required Form Input Labels */
+.login-form .required:after {
+  content: " *";
+  color: red;
+}
+
+/* General icon styling */
+.icon {
+  width: 30px;
+  height: 30px;
+
+  cursor: pointer;
+}
+
+/* Take full height of screen */
+.h-full {
+  min-height: 100vh;
+  height: 100%;
+}
+
+/* Custom background */
+.bg-jam {
+  background-color: #826d9f;
+}
+
+/* Custom selection */
+.custom-select {
+  height: 2.5em;
+}
+
+/* Jar filling 50% */
+.jar-50  {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
+
+  cursor: pointer;
+}
+
+/* Jar filling 100% */
+.jar-100  {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
+
+  cursor: pointer;
+}
+
+/* Animate Jar for 50% */
+.jar-50:before {
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:purple;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:40%;
+  animation:fill 7s steps(700);
+  animation-fill-mode: forwards;
+  z-index:-1;
+}
+
+/* Fill animation */
+@keyframes fill {
+  /* Starting position */
+  from {
+    /* Shift 300px */
+    top: 300px;
+    transform:translateX(-50%) rotate(0deg);
+  }
+
+  /* 90% mark */
+  90% {
+    /* Shift up to 150px (halfway) */
+    top: 150px;
+    transform:translateX(-50%) rotate(360deg);
+    border-radius: 40%;
+  }
+
+  /* 100% mark */
+  100% {
+    /* Prevents border radius from showing at complete part of animation */
+    top: 150px;
+    transform:translateX(-50%) rotate(360deg);
+    border-radius: 0%;
+  }
+}
+
+/* Jam jar 100% animation before state */
+.jar-100:before {
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:purple;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:40%;
+  animation:fill2 7s steps(700);
+  animation-fill-mode: forwards;
+  z-index:-1;
+}
+
+/* Fill2 for 100% animation */
+@keyframes fill2 {
+  /* Starting */
+  from {
+    /* shift 300px down */
+    top: 300px;
+    transform:translateX(-50%) rotate(0deg);
+  }
+  /* 90% progress */
+  90% {
+    /* Take up entire height */
+    top: 0px;
+    transform:translateX(-50%) rotate(360deg);
+    border-radius: 40%;
+  }
+
+  /* 100% progress */
+  100% {
+    /* Prevents border radius from showing at complete part of animation */
+    top: 0px;
+    transform:translateX(-50%) rotate(360deg);
+    border-radius: 0%;
+  }
+}
+
+/* Footer styling */
+footer {
+  /* Sizing */
+  height: 50px;
+  width: 100%;
+
+  /* Colors */
+  background-color: #333333;
+  color: white;
+
+  /* Font */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Copyright printing */
+p.copyright {
+  /* Shift text */
+  line-height: 40px;
+  /* Sizing */
+  font-size: 1em;
+  /* Left shift */
+  padding-left: 1.5%;
+}

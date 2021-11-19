@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src="./scripts/redirect.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <title>JAM Homepage</title>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a class="active" href="./index.html">Home</a>
+    <div class="right">
+      <!-- Links -->
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./dashboard.html">Test</a>
+    </div>
+  </nav>
+  
+  <!-- Hero section -->
+  <section class="container col-xxl-16 px-4 py-5 ">
+    <div class="row flex-lg-row align-items-center g-5 py-5">
+      <!-- Content -->
+      <div class="col-lg-6 d-flex flex-column align-items-lg-start align-items-center">
+        <h1 class="fw-bold display-1">JAM</h1>
+        <div class="accent mb-2"></div>
+        <h1 class="display-6 mb-4">Job Application Manager</h1>
+        <p class="lead text-left">JAM is a self application tracker that helps you stay organized, be productive, and reminds you when your applications are due</p>
+        <div class="d-flex flex-lg-row flex-column gap-2 d-md-flex justify-content-md-start mt-3 text-sm-center">
+          <button type="button" class="btn btn-jam btn-lg px-4 text-white" onclick="redirect('#about')">Learn More</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="redirect('login.html')">Login</button>
+        </div>
+      </div>
+      <!-- Logo -->
+      <div class="col-lg-6 d-flex flex-row justify-content-center">
+        <img src="./Resources/assets/logo.png" class="d-block mx-lg-auto img-fluid mb-5" alt="GNH Logo" width="450" height="450">
+      </div>
+    </div>
+    <!-- Chevron -->
+    <a href="#about">
+      <div class="d-flex justify-content-center">
+        <img class="chevron" src="./Resources/assets/chevron_down.svg" alt="chevron"/>
+      </div>
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section class="bg-jam text-center h-100 w-100 p-3 pb-5" id="about">
+    <h2 class="display-2 text-white mb-4">About</h2>
+    <div class="container pb-5">
+      <div class="row">
+        <!-- Individual Section -->
+        <div class="col-sm">
+          <img class="main_img" src="./Resources/assets/undraw_organize.svg" alt="organized" />
+          <h3>Stay Organized</h3>
+          <div>
+            JAM will help organize all your Opportunities for you 
+            and can hold information about those specific opportunities.
+          </div>
+        </div>
+        <!-- Individual Section -->
+        <div class="col-sm">
+          <img class="main_img" src="./Resources/assets/undraw_time.svg" alt="organized" />
+          <h3>Time is Key</h3>
+          <div>
+            JAM reminds the user when an application is going to be 
+            overdue or has not been started if it is getting close to the
+            application deadline.
+          </div>
+        </div>
+        <!-- Individual Section -->
+        <div class="col-sm">
+          <img class="main_img_2" src="./Resources/assets/undraw_growth.svg" alt="organized" />
+          <h3>Maximize Potential</h3>
+          <div>
+            With using JAM with all of their reminders, it keeps the user
+            on track and makes sure they can complete as many applications
+            as they would like to before their due dates.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Section -->
+  <section class="d-flex flex-column align-items-center my-5">
+    <h2 class="display-6 mb-5">Join Today!</h2>
+    <!-- Button row -->
+    <div class="mt-1 mb-5 d-flex h-100 w-100 justify-content-center gap-5">
+      <button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./login.html')">Login</button>
+      <button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./register.html')">Register</button>
+    </div>
+  </section>
+
+  <footer>
+    <p class="copyright">© JAM 2021</p>
+  </footer>
+</body>
+</html>

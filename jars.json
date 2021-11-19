@@ -1,0 +1,27 @@
+{
+  "jars": [
+    {
+      "company": "Company 1",
+      "date": "10/14/21",
+      "notes": "Notes about company 1",
+      "app_link": "https://url.com",
+      "progress": 2
+    },
+
+    {
+      "company": "Company 2",
+      "date": "10/15/21",
+      "notes": "Notes about company 2",
+      "app_link": "https://url2.com",
+      "progress": 3
+    },
+
+    {
+      "company": "Company 3",
+      "date": "10/16/21",
+      "notes": "Notes about company 3",
+      "app_link": "https://url3.com",
+      "progress": 3
+    }
+  ]
+}

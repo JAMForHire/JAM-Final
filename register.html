@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic" rel="stylesheet">
+  <title>Create a JAM Account</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a class="active" href="./index.html">Home</a>
+    <div class="right">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./dashboard.html">Test</a>
+    </div>
+  </nav>
+
+  <div class="register">
+    <div>
+      <!-- JAM Logo -->
+      <img src="Resources/assets/logo.png" alt="JAM Logo" width="250" height="250">
+
+      <h1>Create an Account</h1>
+
+      <!-- Register Form -->
+      <form class="login-form">
+        <div class="inline-fields">
+          <!-- Input First Name -->
+          <div>
+            <label for="input-first-name" class="required">First Name</label>
+            <input type="text" id="input-first-name" required>
+          </div>
+          <!-- Input Last Name -->
+          <div class="fix-margin">
+            <label for="input-last-name">Last Name</label>
+            <input type="text" id="input-last-name">
+          </div>
+        </div>
+        <!-- Input Email Address -->
+        <div>
+          <label for="input-email" class="required">Email Address</label>
+          <input type="text" id="input-email" required>
+        </div>
+        <div class="inline-fields">
+          <!-- Input Date of Birth -->
+          <div>
+            <label for="input-dob">Date of Birth</label>
+            <input type="date" id="input-dob">
+          </div>
+          <!-- Upload Profile Photo -->
+          <div class="fix-margin">
+            <label for="upload-pfp">Upload Profile Photo</label>
+            <input type="file" id="upload-pfp">
+          </div>
+        </div>
+        <!-- Input Password -->
+        <div>
+          <label for="input-password" class="required">Password</label>
+          <input type="password" id="input-password" required>
+        </div>
+        <!-- Confirm Password -->
+        <div>
+          <label for="input-confirm-password" class="required">Confirm Password</label>
+          <input type="password" id="input-confirm-password" required>
+        </div>
+        <!-- Register Button -->
+        <button type="submit">Register</button>
+      </form>
+
+      <!-- Login Prompt -->
+      <h4>Already have an account?</h4>
+      <a href="login.html"><b>Login →</b></a>
+    </div>
+  </div>
+</body>
+</html>
