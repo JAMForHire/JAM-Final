@@ -28,7 +28,9 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
       if(password_verify($entered_password, $hashed_password)) {
         $_SESSION['logged_in'] = 1;
         $_SESSION['user_id'] = $result[0]['user_id'];
-        $_SESSION['username'] = $entered_username;
+        $_SESSION['username'] = $result[0]['username'];
+        $_SESSION['fname'] = $result[0]['fname'];
+        $_SESSION['lname'] = $result[0]['lname'];
         header("Location: dashboard.html");
         exit();
       }
@@ -91,7 +93,7 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
 
       <!-- Register Prompt -->
       <h4>Don't have an account?</h4>
-      <a href="register.html"><b>Register →</b></a>
+      <a href="register.php"><b>Register →</b></a>
     </div>
   </div>
 </body>
