@@ -106,12 +106,12 @@ img.chevron {
 
 /* Login screen height */
 .login {
-  height: 105vh;
+  height: 107vh;
 }
 
 /* Register screen height */
 .register {
-  height: 140vh;
+  height: 149vh;
 }
 
 /* Login and register headings */
@@ -227,7 +227,7 @@ img.chevron {
   margin: 5% 30%;
   color: white;
   background-color: #B585F8;
-  height: 7vh;
+  height: 8vh;
   border: none;
   font-size: 20px;
   cursor: pointer;

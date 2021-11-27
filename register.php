@@ -24,10 +24,22 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
   $prepared->execute(['username' => $username]);
   $result = $prepared->fetchAll();
 
+  $file_size = $pfp['size'];
+  $file_tmp = $pfp['tmp_name'];
+  $file_type = $pfp['type'];
+  @$file_ext = strtolower(end(explode('.', $pfp['name'])));
+  $extensions = array("jpeg","jpg","png");
+
   if(empty($username)) $register_failed_message = "Please enter a username.";
   else if(empty($password)) $register_failed_message = "Please enter a password.";
   else if($password != $confirmed_password) $register_failed_message = "Passwords do not match.";
   else if(count($result) > 0) $register_failed_message = "User is already registered.";
+  else if(!empty($pfp['name']) && in_array($file_ext, $extensions) === false) {
+    $register_failed_message = "File extension not allowed, please upload a JPG, JPEG, or PNG file.";
+  }
+  else if(!empty($pfp['name']) && $file_size > 2097152) {
+    $register_failed_message = "Uploaded file is too big (needs to be less than 2MB).";
+  }
   else {
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $prepared = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password);");
@@ -46,32 +58,12 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
       $prepared = $db->prepare("UPDATE users SET dob = :dob WHERE user_id = :user_id;");
       $prepared->execute(['dob' => $dob, 'user_id' => $user_id]);
     }
-    if(isset($_FILES['upload-pfp'])){
-      $errors= array();
-      $file_size =$_FILES['upload-pfp']['size'];
-      $file_tmp =$_FILES['upload-pfp']['tmp_name'];
-      $file_type=$_FILES['upload-pfp']['type'];
-      @$file_ext=strtolower(end(explode('.',$_FILES['upload-pfp']['name'])));
-      $file_name = $user_id.'.'.$file_ext;
-      $extensions= array("jpeg","jpg","png");
-      
-      if(in_array($file_ext,$extensions)=== false){
-         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-      }
-      
-      if($file_size > 2097152){
-         $errors[]='File size must be excately 2 MB';
-      }
-      
-      if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"uploads/".$file_name);
-         echo "Success";
-         $prepared = $db->prepare("UPDATE users SET filepath = :filep WHERE user_id = :user_id;");
-         $prepared->execute(['filep' =>"uploads/".$file_name , 'user_id' => $user_id]);
-      }else{
-         print_r($errors);
-      }
-   }
+    if(!empty($pfp['name'])) {
+      $file_name = $user_id . '.' . $file_ext;
+      move_uploaded_file($file_tmp,"uploads/".$file_name);
+      $prepared = $db->prepare("UPDATE users SET filepath = :filep WHERE user_id = :user_id;");
+      $prepared->execute(['filep' =>"uploads/".$file_name , 'user_id' => $user_id]);
+    }
 
     header("Location: login.php");
     exit();
@@ -141,7 +133,7 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
           </div>
           <!-- Upload Profile Photo -->
           <div class="fix-margin">
-            <label for="upload-pfp">Upload Profile Photo (.jpg, .jpeg, .png, .gif)</label>
+            <label for="upload-pfp">Upload Profile Photo (.jpg, .jpeg, .png)</label>
             <input type="file" name="upload-pfp" id="upload-pfp" value=""/>
           </div>
         </div>
@@ -164,5 +156,10 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
       <a href="login.php"><b>Login →</b></a>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="copyright text-white">© JAM 2021</p>
+  </footer>
 </body>
 </html>

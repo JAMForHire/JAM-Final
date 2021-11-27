@@ -96,5 +96,10 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
       <a href="register.php"><b>Register →</b></a>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="copyright text-white">© JAM 2021</p>
+  </footer>
 </body>
 </html>
