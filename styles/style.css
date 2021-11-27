@@ -258,6 +258,16 @@ img.chevron {
   height: 100%;
 }
 
+.h-90 {
+  min-height: 90vh;
+  height: 100%;
+}
+
+.pfp {
+  width: 150px;
+  height: 150px;
+}
+
 /* Custom background */
 .bg-jam {
   background-color: #826d9f;
