@@ -16,7 +16,7 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
   $lname = $_POST['input-last-name'];
   $username = $_POST['input-username'];
   $dob = $_POST['input-dob'];
-  $pfp = $_POST['upload-pfp'];
+  $pfp = $_FILES['upload-pfp'];
   $password = $_POST['input-password'];
   $confirmed_password = $_POST['input-confirm-password'];
 
@@ -46,6 +46,32 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
       $prepared = $db->prepare("UPDATE users SET dob = :dob WHERE user_id = :user_id;");
       $prepared->execute(['dob' => $dob, 'user_id' => $user_id]);
     }
+    if(isset($_FILES['upload-pfp'])){
+      $errors= array();
+      $file_size =$_FILES['upload-pfp']['size'];
+      $file_tmp =$_FILES['upload-pfp']['tmp_name'];
+      $file_type=$_FILES['upload-pfp']['type'];
+      @$file_ext=strtolower(end(explode('.',$_FILES['upload-pfp']['name'])));
+      $file_name = $user_id.'.'.$file_ext;
+      $extensions= array("jpeg","jpg","png");
+      
+      if(in_array($file_ext,$extensions)=== false){
+         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+      
+      if($file_size > 2097152){
+         $errors[]='File size must be excately 2 MB';
+      }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"uploads/".$file_name);
+         echo "Success";
+         $prepared = $db->prepare("UPDATE users SET filepath = :filep WHERE user_id = :user_id;");
+         $prepared->execute(['filep' =>"uploads/".$file_name , 'user_id' => $user_id]);
+      }else{
+         print_r($errors);
+      }
+   }
 
     header("Location: login.php");
     exit();
@@ -89,7 +115,7 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
       </p>
 
       <!-- Register Form -->
-      <form class="login-form" method="post" action="register.php">
+      <form class="login-form" method="POST" action="register.php" enctype="multipart/form-data">
         <div class="inline-fields">
           <!-- Input First Name -->
           <div>
@@ -116,7 +142,7 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
           <!-- Upload Profile Photo -->
           <div class="fix-margin">
             <label for="upload-pfp">Upload Profile Photo (.jpg, .jpeg, .png, .gif)</label>
-            <input type="file" name="upload-pfp" id="upload-pfp"/>
+            <input type="file" name="upload-pfp" id="upload-pfp" value=""/>
           </div>
         </div>
         <!-- Input Password -->
