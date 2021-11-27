@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+    integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./scripts/generate_model.js"></script>
   <script src="./scripts/chevron.js"></script>
   <title>JAM Dashboard</title>
 </head>
+
 <body>
   <!-- Modal -->
   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -62,7 +73,9 @@
               <div class="input-group-append">
                 <label class="input-group-text" for="progress">Progress:</label>
               </div>
-              <select id="progress" class="form-control custom-select text-left border-secondary border border-1 rounded text-secondary" required>
+              <select id="progress"
+                class="form-control custom-select text-left border-secondary border border-1 rounded text-secondary"
+                required>
                 <option selected value="">Choose...</option>
                 <option value="1">Not Started</option>
                 <option value="2">In Progress</option>
@@ -89,15 +102,21 @@
       <a href="./dashboard.html">Test</a>
     </div>
   </nav>
-  
+
   <!-- Main content -->
-  <div class="px-3 h-full">
+  <div class="d-flex h-90">
+    <div class="d-flex flex-column align-items-center flex-shrink-0 p-3 bg-light" style="width: 230px;">
+      <img src="./Resources/assets/profile.png" class="mt-4 mb-3 pfp" />
+      <p>First Last</p>
+    </div>
+    <div class="d-flex flex-column p-3">
     <div class="mt-4 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <!-- Opportunities Section -->
       <h1 class="h2">Opportunities</h1>
       <img class="icon" src="#" id="chevron" alt="chevron" />
       <div class="d-flex justify-content-end w-100 h-25">
-        <button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal" onclick="gen_modal('0')">
+        <button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal"
+          onclick="gen_modal('0')">
           <img class="icon" src="./Resources/assets/add.svg" alt="add" />
         </button>
       </div>
@@ -119,10 +138,12 @@
       </div>
     </div>
   </div>
+  </div>
 
   <!-- Footer -->
   <footer>
     <p class="copyright text-white">© JAM 2021</p>
   </footer>
 </body>
+
 </html>
