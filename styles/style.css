@@ -106,12 +106,12 @@ img.chevron {
 
 /* Login screen height */
 .login {
-  height: 105vh;
+  height: 107vh;
 }
 
 /* Register screen height */
 .register {
-  height: 140vh;
+  height: 149vh;
 }
 
 /* Login and register headings */
@@ -209,12 +209,12 @@ img.chevron {
   /* Size */
   height: 4.25vh;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 /* Login input hover styling */
 .login-form input[type=file]::-webkit-file-upload-button:hover {
   background-color: #9c73d6;
-  cursor: pointer;
 }
 
 .login-form input[type=file]::-webkit-file-upload-button:active {
@@ -222,20 +222,20 @@ img.chevron {
 }
 
 /* Styling for Form Submit Button*/
-.login-form button[type=submit] {
+.login-form input[type=submit] {
   width: 40%;
   margin: 5% 30%;
   color: white;
   background-color: #B585F8;
-  height: 7vh;
+  height: 8vh;
   border: none;
   font-size: 20px;
+  cursor: pointer;
 }
 
 /* Login form submit button hover */
-.login-form button[type=submit]:hover {
+.login-form input[type=submit]:hover {
   background-color: #be95f8;
-  cursor: pointer;
 }
 
 /* Styling for Required Form Input Labels */
