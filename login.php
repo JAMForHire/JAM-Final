@@ -19,19 +19,22 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
   if(empty($entered_username)) $login_failed_message = "Please enter a username.";
   else if(empty($entered_password)) $login_failed_message = "Please enter a password.";
   else {
-    $prepared = $db->prepare("SELECT password from users WHERE (username = :username);");
+    $prepared = $db->prepare("SELECT * from users WHERE (username = :username);");
     $prepared->execute(['username' => $entered_username]);
     $result = $prepared->fetchAll();
     if(count($result) == 0) $login_failed_message = "Login failed.";
     else {
-      $hashed_password = $result[0]["password"];
+      $hashed_password = $result[0]['password'];
       if(password_verify($entered_password, $hashed_password)) {
         $_SESSION['logged_in'] = 1;
         $_SESSION['user_id'] = $result[0]['user_id'];
         $_SESSION['username'] = $result[0]['username'];
         $_SESSION['fname'] = $result[0]['fname'];
         $_SESSION['lname'] = $result[0]['lname'];
-        header("Location: dashboard.html");
+        $_SESSION['type'] = $result[0]['type'];
+        $_SESSION['filepath'] = $result[0]['filepath'];
+        $_SESSION['dob'] = $result[0]['dob'];
+        header("Location: dashboard.php");
         exit();
       }
       else $login_failed_message = "Login failed.";
@@ -39,29 +42,75 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
   }
 }
 
+$nav_login_style = "\"display: block;\"";
+$nav_profile_style = "\"display: none;\"";
+$pfp_src = "Resources/assets/profile.png";
+
+if(!empty($_SESSION['filepath'])) {
+  $pfp_src = $_SESSION['filepath'];
+}
+
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
+  $nav_login_style = "\"display: none;\"";
+  $nav_profile_style = "\"display: block;\"";
+}
+else {
+  $nav_login_style = "\"display: block;\"";
+  $nav_profile_style = "\"display: none;\"";
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/style.css">
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src="./scripts/redirect.js" defer></script>
+  <script src="./scripts/profile.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" defer></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" defer></script>
   <title>Log into JAM</title>
 </head>
 
 <body>
   <!-- Navbar -->
   <nav>
-    <a class="active" href="./index.html">Home</a>
+    <a class="active" href="./index.php">Home</a>
     <div class="right">
-      <a href="./dashboard.html">Dashboard</a>
-      <a href="./dashboard.html">Test</a>
+      <!-- Links -->
+      <a href="./dashboard.php">Dashboard</a>
+      <a href="./login.php" style=<?php echo $nav_login_style; ?>>Login</a>
+      <button id="profile-icon-button" onclick="toggleProfile()" style=<?php echo $nav_profile_style; ?>>
+        <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
+      </button>
     </div>
   </nav>
+
+  <!-- Profile section -->
+  <div id="profile-menu" style="display: none;">
+    <div id="profile-overview">
+      <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
+      <p><?php echo $_SESSION['username'] ?>'s Profile</p>
+    </div>
+    <div>
+      <?php
+        if(!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
+          echo "<p>Name: " . $_SESSION['fname'] . " " . $_SESSION['lname'] . "</p>";
+        }
+        if($_SESSION['type'] == 1) echo "<p>User Type: Premium</p>";
+        else echo "<p>User Type: Standard</p>";
+        if($_SESSION['dob'] != "0000-00-00") echo "<p>Date of Birth: " . $_SESSION['dob'] . "</p>";
+      ?>
+      <form id="logout-form" method="post" action="logout.php">
+        <input type="submit" name="logout" id="logout" value="Logout"/>
+      </form>
+    </div>
+  </div>
 
   <div class="login">
     <div>
