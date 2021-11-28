@@ -19,18 +19,21 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
   if(empty($entered_username)) $login_failed_message = "Please enter a username.";
   else if(empty($entered_password)) $login_failed_message = "Please enter a password.";
   else {
-    $prepared = $db->prepare("SELECT password from users WHERE (username = :username);");
+    $prepared = $db->prepare("SELECT * from users WHERE (username = :username);");
     $prepared->execute(['username' => $entered_username]);
     $result = $prepared->fetchAll();
     if(count($result) == 0) $login_failed_message = "Login failed.";
     else {
-      $hashed_password = $result[0]["password"];
+      $hashed_password = $result[0]['password'];
       if(password_verify($entered_password, $hashed_password)) {
         $_SESSION['logged_in'] = 1;
         $_SESSION['user_id'] = $result[0]['user_id'];
         $_SESSION['username'] = $result[0]['username'];
         $_SESSION['fname'] = $result[0]['fname'];
         $_SESSION['lname'] = $result[0]['lname'];
+        $_SESSION['type'] = $result[0]['type'];
+        $_SESSION['filepath'] = $result[0]['filepath'];
+        $_SESSION['dob'] = $result[0]['dob'];
         header("Location: dashboard.php");
         exit();
       }
@@ -74,12 +77,17 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
   <div id="profile-menu" style="display: none;">
     <div id="profile-overview">
       <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
-      <p>username's Profile</p>
+      <p><?php echo $_SESSION['username'] ?>'s Profile</p>
     </div>
     <div>
-      <p>Name: First Name Last Name</p>
-      <p>User Type: Premium</p>
-      <p>Date of Birth: 0000-00-00</p>
+      <?php
+        if(!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
+          echo "<p>Name: " . $_SESSION['fname'] . " " . $_SESSION['lname'] . "</p>";
+        }
+        if($_SESSION['type'] == 1) echo "<p>User Type: Premium</p>";
+        else echo "<p>User Type: Standard</p>";
+        if($_SESSION['dob'] != "0000-00-00") echo "<p>Date of Birth: " . $_SESSION['dob'] . "</p>";
+      ?>
       <form id="logout-form" method="post">
         <input type="submit" id="logout" value="Logout"/>
       </form>

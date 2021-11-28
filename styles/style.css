@@ -435,7 +435,7 @@ p.copyright {
   height: 30vh;
   border: 2px solid black;
   padding: 1vw;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 #profile-overview {

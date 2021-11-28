@@ -1,3 +1,16 @@
+<?php
+session_start();
+include_once('config.php');
+
+try {
+  $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
+}
+catch(PDOException $e) {
+  echo "Failed to connect to JAM database: " . $e->getMessage() . "<br>";
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,12 +123,17 @@
   <div id="profile-menu" style="display: none;">
     <div id="profile-overview">
       <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
-      <p>username's Profile</p>
+      <p><?php echo $_SESSION['username'] ?>'s Profile</p>
     </div>
     <div>
-      <p>Name: First Name Last Name</p>
-      <p>User Type: Premium</p>
-      <p>Date of Birth: 0000-00-00</p>
+      <?php
+        if(!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
+          echo "<p>Name: " . $_SESSION['fname'] . " " . $_SESSION['lname'] . "</p>";
+        }
+        if($_SESSION['type'] == 1) echo "<p>User Type: Premium</p>";
+        else echo "<p>User Type: Standard</p>";
+        if($_SESSION['dob'] != "0000-00-00") echo "<p>Date of Birth: " . $_SESSION['dob'] . "</p>";
+      ?>
       <form id="logout-form" method="post">
         <input type="submit" id="logout" value="Logout"/>
       </form>
