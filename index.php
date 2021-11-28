@@ -9,6 +9,18 @@ catch(PDOException $e) {
   echo "Failed to connect to JAM database: " . $e->getMessage() . "<br>";
   exit();
 }
+
+$nav_login_style = "\"display: block;\"";
+$nav_profile_style = "\"display: none;\"";
+
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
+  $nav_login_style = "\"display: none;\"";
+  $nav_profile_style = "\"display: block;\"";
+}
+else {
+  $nav_login_style = "\"display: block;\"";
+  $nav_profile_style = "\"display: none;\"";
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +46,8 @@ catch(PDOException $e) {
     <div class="right">
       <!-- Links -->
       <a href="./dashboard.php">Dashboard</a>
-      <button id="profile-icon-button" onclick="toggleProfile()">
+      <a href="./login.php" style=<?php echo $nav_login_style; ?>>Login</a>
+      <button id="profile-icon-button" onclick="toggleProfile()" style=<?php echo $nav_profile_style; ?>>
         <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
       </button>
     </div>
@@ -55,8 +68,8 @@ catch(PDOException $e) {
         else echo "<p>User Type: Standard</p>";
         if($_SESSION['dob'] != "0000-00-00") echo "<p>Date of Birth: " . $_SESSION['dob'] . "</p>";
       ?>
-      <form id="logout-form" method="post">
-        <input type="submit" id="logout" value="Logout"/>
+      <form id="logout-form" method="post" action="logout.php">
+        <input type="submit" name="logout" id="logout" value="Logout"/>
       </form>
     </div>
   </div>
