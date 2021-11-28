@@ -161,8 +161,16 @@ else {
   <!-- Main content -->
   <div class="d-flex h-90">
     <div class="d-flex flex-column align-items-center flex-shrink-0 p-3 bg-light" style="width: 230px;">
-      <img src="./Resources/assets/profile.png" class="mt-4 mb-3 pfp" />
-      <p>First Last</p>
+      <img src=<?php echo $pfp_src ?> class="mt-4 mb-3 pfp" />
+      <?php
+        if(isset($_SESSION['logged_in'])) {
+          if(!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
+            echo "<p>" . $_SESSION['fname'] . " " . $_SESSION['lname'] . "</p>";
+          }
+          else echo "<p>" . $_SESSION['username'] . "</p>";
+        }
+        else echo "<p style=\"text-align: center\">Log in to access this feature of JAM!</p>";
+      ?>
     </div>
     <div class="d-flex flex-column p-3">
     <div class="mt-4 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
