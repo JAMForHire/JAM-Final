@@ -44,6 +44,11 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
 
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
+$pfp_src = "Resources/assets/profile.png";
+
+if(!empty($_SESSION['filepath'])) {
+  $pfp_src = $_SESSION['filepath'];
+}
 
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
   $nav_login_style = "\"display: none;\"";
@@ -81,7 +86,7 @@ else {
       <a href="./dashboard.php">Dashboard</a>
       <a href="./login.php" style=<?php echo $nav_login_style; ?>>Login</a>
       <button id="profile-icon-button" onclick="toggleProfile()" style=<?php echo $nav_profile_style; ?>>
-        <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
+        <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
       </button>
     </div>
   </nav>
@@ -89,7 +94,7 @@ else {
   <!-- Profile section -->
   <div id="profile-menu" style="display: none;">
     <div id="profile-overview">
-      <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
+      <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
       <p><?php echo $_SESSION['username'] ?>'s Profile</p>
     </div>
     <div>
