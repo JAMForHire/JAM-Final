@@ -17,10 +17,10 @@
 <body>
   <!-- Navbar -->
   <nav>
-    <a class="active" href="./index.html">Home</a>
+    <a class="active" href="./index.php">Home</a>
     <div class="right">
       <!-- Links -->
-      <a href="./dashboard.html">Dashboard</a>
+      <a href="./dashboard.php">Dashboard</a>
       <button id="profile-icon-button" onclick="toggleProfile()">
         <img class="profile-icon" src="Resources/assets/profile.png" alt="User Profile Picture"/>
       </button>

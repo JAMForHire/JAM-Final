@@ -90,6 +90,7 @@ img.chevron {
   /* Text styling */
   text-align: center;
   font-family: 'Roboto', 'Cyrillic', sans-serif;
+  margin-bottom: 3%;
 }
 
 /* Image sizing */
@@ -104,26 +105,15 @@ img.chevron {
   margin-bottom: 15%;
 }
 
-/* Login screen height */
-.login {
-  height: 107vh;
-}
-
-/* Register screen height */
-.register {
-  height: 149vh;
-}
-
-/* Login and register headings */
 .login h1, .register h1 {
-  /* Shifting */
-  margin-top: -3%;
+  font-size: 32px;
 }
 
 /* Login and register headings */
 .login h4, .register h4 {
   /* Shifting */
   margin-bottom: 2%;
+  font-size: 20px;
 }
 
 /* Login link styling */
@@ -134,6 +124,10 @@ img.chevron {
   font-size: 14px;
 }
 
+.login a:hover, .register a:hover {
+  color: #55D5FF;
+}
+
 /* Login general styling */
 .login .login-form {
   /* Text styling */
@@ -141,7 +135,7 @@ img.chevron {
   /* Sizing */
   width: 125%;
   /* Shifting */
-  margin-left: -12.5%;
+  margin: -5% 0 5% -12.5%;
 }
 
 /* Register general styling */
@@ -149,9 +143,9 @@ img.chevron {
   /* Text */
   text-align: left;
   /* Size */
-  width: 90%;
+  width: 80%;
   /* Shift */
-  margin-left: 5%;
+  margin: -2% auto 2% auto;
 }
 
 /* Login form styling */
@@ -184,8 +178,9 @@ img.chevron {
   display: block;
   border: 1px solid #a1a1a1;
   margin: 1% 0 4% 0;
-  height: 4vh;
-  padding: 1%;
+  height: 5vh;
+  padding: 5px;
+  font-size: 14px;
 }
 
 /* Styling for Form Date Picker*/
@@ -198,6 +193,7 @@ img.chevron {
 .login-form input[type=file] {
   margin: 1% 0 4% 0;
   font-family: 'Roboto', 'Cyrillic', sans-serif;
+  font-size: 14px;
 }
 
 /* Login input stylings */
