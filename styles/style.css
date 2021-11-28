@@ -418,3 +418,36 @@ p.copyright {
   /* Left shift */
   padding-left: 1.5%;
 }
+
+#profile-icon-button {
+  background-color: #555;
+  border: none;
+  margin: 0.5% 3%;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+}
+
+#profile-menu {
+  background-color: white;
+  z-index: 10;
+  position: absolute;
+  right: 0;
+  width: 30vw;
+  height: 30vh;
+  border: 2px solid black;
+  padding: 1vw;
+  justify-content: space-between;
+}
+
+#profile-overview {
+  text-align: center;
+  padding: 5px;
+}
+
+#profile-overview img {
+  width: 75px;
+  height: 75px;
+}
