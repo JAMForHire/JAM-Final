@@ -14,7 +14,7 @@ try {
       // Put into corresponding variables
       $id = $_POST['id'];
       $name = $_POST['company'];
-      $date = $POST['date'];
+      $date = $_POST['date'];
       $notes = $_POST['notes'];
       $link = $_POST['link'];
       $progress = $_POST['progress'];
