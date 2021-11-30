@@ -14,10 +14,6 @@
         <div class='modal-dialog modal-dialog-centered' role='document'>
           <!-- Main Modal Content -->
           <div class='modal-content'>
-            <div class='modal-header border-0'>
-              <!-- Heading -->
-              <h5 class='modal-title' id='modalTitle'>JAM Jar</h5>
-            </div>
             <!-- Body text -->
             <div class='modal-body'>
               <h1 class='text-center mb-4'>$name</h1>
@@ -66,6 +62,7 @@
                   </select>
                 </div>
                 <div class='modal-footer'>
+                  <input type='submit' name='delete' value='Delete' class='btn btn-danger' />
                   <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                   <input type='submit' class='btn btn-primary' />
                 </div>

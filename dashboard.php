@@ -28,8 +28,11 @@ try {
       }
 
       // Remove jar
-      else if(isset($_POST['delete'])) {
-
+      else if(isset($_POST['delete'])) { 
+        $sql = "DELETE FROM jars WHERE id=:id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $finish = $stmt->fetchAll();
       }
 
       // Updating jar
