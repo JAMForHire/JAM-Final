@@ -1,4 +1,7 @@
 <?php
+
+require_once("./components/jar.php");
+
 session_start();
 include_once('config.php');
 
@@ -58,72 +61,6 @@ else {
 </head>
 
 <body>
-  <!-- Modal -->
-  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <!-- Main Modal Content -->
-      <div class="modal-content">
-        <div class="modal-header border-0">
-          <!-- Heading -->
-          <h5 class="modal-title" id="modalTitle">Create JAM Jar</h5>
-        </div>
-        <!-- Body text -->
-        <div class="modal-body">
-          <h1 class="text-center mb-4">Opportunity Title</h1>
-          <form class="">
-            <!-- Company Input -->
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Company:</span>
-              </div>
-              <input type="text" id="company" class="form-control" placeholder="Enter company name" required>
-            </div>
-            <!-- Due Date Input -->
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Due Date:</span>
-              </div>
-              <input type="text" id="date" class="form-control" placeholder="mm/dd/yy" required>
-            </div>
-            <!-- Notes Input -->
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text pr-5">Notes:</span>
-              </div>
-              <textarea id="notes" rows="5" class="form-control" placeholder="Enter notes"></textarea>
-            </div>
-            <!-- Application Link Input -->
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Link:</span>
-              </div>
-              <input type="text" id="app_link" class="form-control" placeholder="Application Link" required>
-            </div>
-            <!-- Progress Selection -->
-            <div class="input-group mb-4">
-              <div class="input-group-append">
-                <label class="input-group-text" for="progress">Progress:</label>
-              </div>
-              <select id="progress"
-                class="form-control custom-select text-left border-secondary border border-1 rounded text-secondary"
-                required>
-                <option selected value="">Choose...</option>
-                <option value="1">Not Started</option>
-                <option value="2">In Progress</option>
-                <option value="3">Completed</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <!-- Buttons for closing -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Navbar -->
   <nav>
     <a class="active" href="./index.php">Home</a>
@@ -186,19 +123,9 @@ else {
     </div>
 
     <!-- Jars -->
-    <div class="d-flex gap-5 flex-column flex-lg-row">
+    <div class="w-full d-flex gap-5 flex-column flex-lg-row">
       <!-- Jar -->
-      <div id="jar_1" class="jar-50" data-toggle="modal" data-target="#modal" onclick="gen_modal('jar_1')">
-        Company 1
-      </div>
-      <!-- Jar -->
-      <div id="jar_2" class="jar-100" data-toggle="modal" data-target="#modal" onclick="gen_modal('jar_2')">
-        Company 2
-      </div>
-      <!-- Jar -->
-      <div id="jar_3" class="jar-100" data-toggle="modal" data-target="#modal" onclick="gen_modal('jar_3')">
-        Company 3
-      </div>
+      <?php render_jar(1, 'a', 'date', 'notes', 'link', 1) ?>
     </div>
   </div>
   </div>
