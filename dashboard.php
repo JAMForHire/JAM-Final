@@ -4,6 +4,12 @@ require_once("./components/jar.php");
 session_start();
 include_once('config.php');
 
+if(!isset($_SESSION['user_id'])) {
+  header("location: login.php");
+}
+
+$user_id = $_SESSION['user_id'];
+
 try {
   $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
   $user_id = $_SESSION['user_id'];

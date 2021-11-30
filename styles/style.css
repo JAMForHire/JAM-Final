@@ -447,3 +447,7 @@ p.copyright {
   width: 75px;
   height: 75px;
 }
+
+ul.jar_table {
+  column-count: 3;
+}
