@@ -1,7 +1,6 @@
 <?php
 
 require_once("./components/jar.php");
-
 session_start();
 include_once('config.php');
 
@@ -12,6 +11,8 @@ catch(PDOException $e) {
   echo "Failed to connect to JAM database: " . $e->getMessage() . "<br>";
   exit();
 }
+
+$jars = get_jars($db);
 
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
@@ -125,7 +126,11 @@ else {
     <!-- Jars -->
     <div class="w-full d-flex gap-5 flex-column flex-lg-row">
       <!-- Jar -->
-      <?php render_jar(1, 'a', 'date', 'notes', 'link', 1) ?>
+      <?php 
+        foreach($jars as $jar) {
+          render_jar($jar['id'], $jar['company'], $jar['date'], $jar['notes'], $jar['link'], 2);
+        }
+      ?>
     </div>
   </div>
   </div>

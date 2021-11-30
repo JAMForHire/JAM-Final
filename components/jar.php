@@ -1,4 +1,12 @@
 <?php 
+  function get_jars($conn) {
+    $sql = "SELECT * FROM jars";
+    $query = $conn->query($sql);
+    $result = $query->fetchAll();
+
+    return $result;
+  }
+
   function render_jar($id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
     echo "
