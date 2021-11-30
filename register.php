@@ -21,7 +21,7 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
   $password = $_POST['input-password'];
   $confirmed_password = $_POST['input-confirm-password'];
 
-  $prepared = $db->prepare("SELECT * from users WHERE (username = :username);");
+  $prepared = $db->prepare("SELECT * from users WHERE (username = :username)");
   $prepared->execute(['username' => $username]);
   $result = $prepared->fetchAll();
 
@@ -43,8 +43,8 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
   }
   else {
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-    $prepared = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password);");
-    $prepared->execute(['username' => $username, 'password' => $hashed_password]);
+    $prepared = $db->prepare("INSERT INTO users (username, password, type) VALUES (:username, :password, :type)");
+    $prepared->execute(['username' => $username, 'password' => $hashed_password, 'type' => 0]);
     $user_id = $db->lastInsertId();
 
     if(!empty($fname)) {
@@ -65,6 +65,8 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
       $prepared = $db->prepare("UPDATE users SET filepath = :filep WHERE user_id = :user_id;");
       $prepared->execute(['filep' =>"uploads/".$file_name , 'user_id' => $user_id]);
     }
+
+    $finish = $prepared->fetchAll();
 
     header("Location: login.php");
     exit();

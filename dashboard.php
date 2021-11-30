@@ -6,6 +6,7 @@ include_once('config.php');
 
 try {
   $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
+  $user_id = $_SESSION['user_id'];
 
   // Check for post request
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,28 +24,31 @@ try {
       if(isset($_POST['add'])) {
         $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['user_id' => 0, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => 2]);
+        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => 2]);
         $finish = $stmt->fetchAll();
       }
 
       // Remove jar
       else if(isset($_POST['delete'])) { 
-        $sql = "DELETE FROM jars WHERE id=:id";
+        $sql = "DELETE FROM jars WHERE id=:id AND user_id=:user_id";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['id' => $id]);
+        $stmt->execute(['id' => $id, 'user_id' => $user_id]);
         $finish = $stmt->fetchAll();
       }
 
       // Updating jar
       else {
         // Prepare sql statement
-        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id";
+        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id AND user_id=:user_id";
         $stmt = $db->prepare($sql);
 
         // Execute
-        $stmt->execute(['id' => $id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
+        $stmt->execute(['id' => $id, 'user_id' => $user_id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
         $finish = $stmt->fetchAll();
       }
+
+      header("Location: dashboard.php");
+      exit();
     }
   }
 }
@@ -53,7 +57,7 @@ catch(PDOException $e) {
   exit();
 }
 
-$jars = get_jars($db);
+$jars = get_jars($db, $user_id);
 
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
@@ -234,7 +238,7 @@ else {
       <!-- Jar -->
       <?php 
         foreach($jars as $jar) {
-          render_jar($jar['id'], $jar['company'], $jar['date'], $jar['notes'], $jar['link'], 2);
+          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], 2);
         }
       ?>
     </div>

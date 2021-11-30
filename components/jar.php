@@ -1,13 +1,14 @@
 <?php 
-  function get_jars($conn) {
-    $sql = "SELECT * FROM jars";
-    $query = $conn->query($sql);
-    $result = $query->fetchAll();
+  function get_jars($conn, $user_id) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['user_id' => $user_id]);
+    $result = $stmt->fetchAll();
 
     return $result;
   }
 
-  function render_jar($id, $name, $date, $notes, $link, $progress) {
+  function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
     echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
