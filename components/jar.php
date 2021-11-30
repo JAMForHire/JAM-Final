@@ -21,41 +21,42 @@
             <!-- Body text -->
             <div class='modal-body'>
               <h1 class='text-center mb-4'>$name</h1>
-              <form class=''>
+              <form method='POST' class=''>
+                <input type='hidden' name='id' value='$id' />
                 <!-- Company Input -->
                 <div class='input-group mb-4'>
                   <div class='input-group-prepend'>
                     <span class='input-group-text'>Company:</span>
                   </div>
-                  <input type='text' id='company' class='form-control' placeholder='$name' required>
+                  <input type='text' id='company' name='company' class='form-control' value='$name' required>
                 </div>
                 <!-- Due Date Input -->
                 <div class='input-group mb-4'>
                   <div class='input-group-prepend'>
                     <span class='input-group-text'>Due Date:</span>
                   </div>
-                  <input type='text' id='date' class='form-control' placeholder='$date' required>
+                  <input type='date' id='date' name='date' class='form-control' value='$date' required>
                 </div>
                 <!-- Notes Input -->
                 <div class='input-group mb-4'>
                   <div class='input-group-prepend'>
                     <span class='input-group-text pr-5'>Notes:</span>
                   </div>
-                  <textarea id='notes' rows='5' class='form-control' placeholder='$notes'></textarea>
+                  <textarea id='notes' rows='5' name='notes' class='form-control'>$notes</textarea>
                 </div>
                 <!-- Application Link Input -->
                 <div class='input-group mb-4'>
                   <div class='input-group-prepend'>
                     <span class='input-group-text'>Link:</span>
                   </div>
-                  <input type='text' id='app_link' class='form-control' placeholder='$link' required>
+                  <input type='text' id='app_link' name='link' class='form-control' value='$link' required>
                 </div>
                 <!-- Progress Selection -->
                 <div class='input-group mb-4'>
                   <div class='input-group-append'>
                     <label class='input-group-text' for='progress'>Progress:</label>
                   </div>
-                  <select id='progress'
+                  <select id='progress' name='progress'
                     class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
                     required>
                     <option selected value='$progress'>Choose...</option>
@@ -64,19 +65,19 @@
                     <option value='3'>Completed</option>
                   </select>
                 </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                  <input type='submit' class='btn btn-primary' />
+                </div>
               </form>
             </div>
             <!-- Buttons for closing -->
-            <div class='modal-footer'>
-              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-              <button type='button' class='btn btn-primary' data-dismiss='modal'>Confirm</button>
-            </div>
           </div>
         </div>
       </div>
 
       <div id='jar_$id' class='jar-50' data-toggle='modal' data-target='#$modal'>
-        Company $id
+        $name
       </div>
     ";
   }

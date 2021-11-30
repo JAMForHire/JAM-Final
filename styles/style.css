@@ -447,8 +447,3 @@ p.copyright {
   width: 75px;
   height: 75px;
 }
-
-/* Take full width */
-.w-full {
-  min-width: 100vw;
-}

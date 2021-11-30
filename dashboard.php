@@ -6,6 +6,28 @@ include_once('config.php');
 
 try {
   $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
+
+  // Check for post request
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if params are set
+    if(isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
+      // Put into corresponding variables
+      $id = $_POST['id'];
+      $name = $_POST['company'];
+      $date = $POST['date'];
+      $notes = $_POST['notes'];
+      $link = $_POST['link'];
+      $progress = $_POST['progress'];
+      
+      // Prepare sql statement
+      $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id";
+      $stmt = $db->prepare($sql);
+
+      // Execute
+      $stmt->execute(['id' => $id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
+      $finish = $stmt->fetchAll();
+    }
+  }
 }
 catch(PDOException $e) {
   echo "Failed to connect to JAM database: " . $e->getMessage() . "<br>";
@@ -124,7 +146,7 @@ else {
     </div>
 
     <!-- Jars -->
-    <div class="w-full d-flex gap-5 flex-column flex-lg-row">
+    <div class="d-flex gap-5 flex-column flex-lg-row">
       <!-- Jar -->
       <?php 
         foreach($jars as $jar) {
