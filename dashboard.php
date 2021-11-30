@@ -240,7 +240,7 @@ else {
     </div>
 
     <!-- Jars -->
-    <div class="d-flex gap-5 flex-column flex-lg-row">
+    <div class="jar-row">
       <!-- Jar -->
       <?php 
         foreach($jars as $jar) {

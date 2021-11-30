@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div id='jar_$id' class='jar-50' data-toggle='modal' data-target='#$modal'>
+      <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
         $name
       </div>
     ";
