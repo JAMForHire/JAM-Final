@@ -9,23 +9,39 @@ try {
 
   // Check for post request
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Put into corresponding variables
+    $id = $_POST['id'];
+    $name = $_POST['company'];
+    $date = $_POST['date'];
+    $notes = $_POST['notes'];
+    $link = $_POST['link'];
+    $progress = $_POST['progress'];
+
     // Check if params are set
     if(isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
-      // Put into corresponding variables
-      $id = $_POST['id'];
-      $name = $_POST['company'];
-      $date = $_POST['date'];
-      $notes = $_POST['notes'];
-      $link = $_POST['link'];
-      $progress = $_POST['progress'];
-      
-      // Prepare sql statement
-      $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id";
-      $stmt = $db->prepare($sql);
+      // If inserting jar
+      if(isset($_POST['add'])) {
+        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['user_id' => 0, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => 2]);
+        $finish = $stmt->fetchAll();
+      }
 
-      // Execute
-      $stmt->execute(['id' => $id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
-      $finish = $stmt->fetchAll();
+      // Remove jar
+      else if(isset($_POST['delete'])) {
+
+      }
+
+      // Updating jar
+      else {
+        // Prepare sql statement
+        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id";
+        $stmt = $db->prepare($sql);
+
+        // Execute
+        $stmt->execute(['id' => $id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
+        $finish = $stmt->fetchAll();
+      }
     }
   }
 }
@@ -84,6 +100,72 @@ else {
 </head>
 
 <body>
+  <div class='modal fade' id='modal' tabindex='-1' role='dialog' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered' role='document'>
+      <!-- Main Modal Content -->
+      <div class='modal-content'>
+        <div class='modal-header border-0'>
+          <!-- Heading -->
+          <h5 class='modal-title' id='modalTitle'>JAM Jar</h5>
+        </div>
+        <!-- Body text -->
+        <div class='modal-body'>
+          <h1 class='text-center mb-4'>Enter information</h1>
+          <form method='POST' class=''>
+            <input type='hidden' name='add' value='add' />
+            <input type='hidden' name='id' value='id' />
+            <!-- Company Input -->
+            <div class='input-group mb-4'>
+              <div class='input-group-prepend'>
+                <span class='input-group-text'>Company:</span>
+              </div>
+              <input type='text' id='company' name='company' class='form-control' placeholder='Enter company name' required>
+            </div>
+            <!-- Due Date Input -->
+            <div class='input-group mb-4'>
+              <div class='input-group-prepend'>
+                <span class='input-group-text'>Due Date:</span>
+              </div>
+              <input type='date' id='date' name='date' class='form-control' placeholder='Enter date' required>
+            </div>
+            <!-- Notes Input -->
+            <div class='input-group mb-4'>
+              <div class='input-group-prepend'>
+                <span class='input-group-text pr-5'>Notes:</span>
+              </div>
+              <textarea id='notes' rows='5' name='notes' class='form-control' placeholder='Enter notes'></textarea>
+            </div>
+            <!-- Application Link Input -->
+            <div class='input-group mb-4'>
+              <div class='input-group-prepend'>
+                <span class='input-group-text'>Link:</span>
+              </div>
+              <input type='text' id='app_link' name='link' class='form-control' placeholder='Enter link' required>
+            </div>
+            <!-- Progress Selection -->
+            <div class='input-group mb-4'>
+              <div class='input-group-append'>
+                <label class='input-group-text' for='progress'>Progress:</label>
+              </div>
+              <select id='progress' name='progress'
+                class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
+                required>
+                <option selected value='$progress'>Choose...</option>
+                <option value='1'>Not Started</option>
+                <option value='2'>In Progress</option>
+                <option value='3'>Completed</option>
+              </select>
+            </div>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+              <input type='submit' class='btn btn-primary' />
+            </div>
+          </form>
+        </div>
+        <!-- Buttons for closing -->
+      </div>
+    </div>
+  </div>
   <!-- Navbar -->
   <nav>
     <a class="active" href="./index.php">Home</a>
@@ -138,8 +220,7 @@ else {
       <h1 class="h2">Opportunities</h1>
       <img class="icon" src="#" id="chevron" alt="chevron" />
       <div class="d-flex justify-content-end w-100 h-25">
-        <button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal"
-          onclick="gen_modal('0')">
+        <button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">
           <img class="icon" src="./Resources/assets/add.svg" alt="add" />
         </button>
       </div>
