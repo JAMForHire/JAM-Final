@@ -30,7 +30,7 @@ try {
       if (isset($_POST['add'])) {
         $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => 2]);
+        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
       }
 
@@ -45,11 +45,11 @@ try {
       // Updating jar
       else {
         // Prepare sql statement
-        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id AND user_id=:user_id";
+        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link, progress=:progress WHERE id=:id AND user_id=:user_id";
         $stmt = $db->prepare($sql);
 
         // Execute
-        $stmt->execute(['id' => $id, 'user_id' => $user_id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
+        $stmt->execute(['id' => $id, 'user_id' => $user_id, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
       }
 
@@ -237,18 +237,18 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                 <img class="icon" src="#" id="chevron" alt="chevron" />
                 <div class="d-flex justify-content-end w-100 h-25">
                     <?php
-          //Check if they are a premium user and if they are then they can create a modal          
-          if ((int)$_SESSION['type'] == 1) {
-            echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
-            //normal user has a max of 5 if trying to make another one give message
-          } else if ((int)$jar_count >= 5) {
-            echo '<button type="button" class="bg-transparent border-0" 
-                            onclick="upgrade()">';
-            //normal user under their 5 opportunities
-          } else {
-            echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
-          }
-          ?>
+                      //Check if they are a premium user and if they are then they can create a modal          
+                      if ((int)$_SESSION['type'] == 1) {
+                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
+                        //normal user has a max of 5 if trying to make another one give message
+                      } else if ((int)$jar_count >= 5) {
+                        echo '<button type="button" class="bg-transparent border-0" 
+                                        onclick="upgrade()">';
+                        //normal user under their 5 opportunities
+                      } else {
+                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
+                      }
+                    ?>
                     <img class="icon" src="./Resources/assets/add.svg" alt="add" />
                     </button>
                 </div>
@@ -258,10 +258,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
             <div class="jar-row">
                 <!-- Jar -->
                 <?php
-        foreach ($jars as $jar) {
-          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], 2);
-        }
-        ?>
+                  foreach ($jars as $jar) {
+                    render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
+                  }
+                ?>
             </div>
         </div>
     </div>
