@@ -10,6 +10,11 @@
 
   function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
+    $selected = ["", "", "", ""];
+    if($progress == 1) $selected[1] = "selected";
+    else if($progress == 2) $selected[2] = "selected";
+    else if($progress == 3) $selected[3] = "selected";
+    else $selected[0] = "selected";
     echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -56,10 +61,10 @@
                   <select id='progress' name='progress'
                     class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
                     required>
-                    <option selected value='$progress'>Choose...</option>
-                    <option value='1'>Not Started</option>
-                    <option value='2'>In Progress</option>
-                    <option value='3'>Completed</option>
+                    <option $selected[0] value='$progress'>Choose...</option>
+                    <option $selected[1] value='1'>Not Started</option>
+                    <option $selected[2] value='2'>In Progress</option>
+                    <option $selected[3] value='3'>Completed</option>
                   </select>
                 </div>
                 <div class='modal-footer'>

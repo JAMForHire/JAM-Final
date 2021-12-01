@@ -30,7 +30,7 @@ try {
       if(isset($_POST['add'])) {
         $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => 2]);
+        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
       }
 
@@ -45,11 +45,11 @@ try {
       // Updating jar
       else {
         // Prepare sql statement
-        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link WHERE id=:id AND user_id=:user_id";
+        $sql = "UPDATE jars SET company=:name, date=:date, notes=:notes, link=:link, progress=:progress WHERE id=:id AND user_id=:user_id";
         $stmt = $db->prepare($sql);
 
         // Execute
-        $stmt->execute(['id' => $id, 'user_id' => $user_id, 'name' => $name, 'notes' => $notes, 'link' => $link]);
+        $stmt->execute(['id' => $id, 'user_id' => $user_id, 'name' => $name, 'date' => $date, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
       }
 
@@ -244,7 +244,7 @@ else {
       <!-- Jar -->
       <?php 
         foreach($jars as $jar) {
-          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], 2);
+          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
         }
       ?>
     </div>
