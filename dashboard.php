@@ -63,6 +63,7 @@ try {
 }
 
 $jars = get_jars($db, $user_id);
+$jar_count = get_num_jars($db, $user_id);
 
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
@@ -107,6 +108,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <script src="./scripts/generate_model.js" defer></script>
     <script src="./scripts/chevron.js" defer></script>
     <script src="./scripts/profile.js" defer></script>
+    <script src="./scripts/upgrade.js" defer></script>
     <title>JAM Dashboard</title>
 </head>
 
@@ -234,8 +236,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                 <h1 class="h2">Opportunities</h1>
                 <img class="icon" src="#" id="chevron" alt="chevron" />
                 <div class="d-flex justify-content-end w-100 h-25">
-                    <button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">
-                        <img class="icon" src="./Resources/assets/add.svg" alt="add" />
+                    <?php
+                      //Check if they are a premium user and if they are then they can create a modal          
+                      if ((int)$_SESSION['type'] == 1) {
+                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
+                        //normal user has a max of 5 if trying to make another one give message
+                      } else if ((int)$jar_count >= 5) {
+                        echo '<button type="button" class="bg-transparent border-0" 
+                                        onclick="upgrade()">';
+                        //normal user under their 5 opportunities
+                      } else {
+                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
+                      }
+                    ?>
+                    <img class="icon" src="./Resources/assets/add.svg" alt="add" />
                     </button>
                 </div>
             </div>
@@ -244,10 +258,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
             <div class="jar-row">
                 <!-- Jar -->
                 <?php
-        foreach ($jars as $jar) {
-          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
-        }
-        ?>
+                  foreach ($jars as $jar) {
+                    render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
+                  }
+                ?>
             </div>
         </div>
     </div>

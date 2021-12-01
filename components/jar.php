@@ -9,6 +9,16 @@ function get_jars($conn, $user_id)
   return $result;
 }
 
+function get_num_jars($conn, $user_id)
+{
+  $sql = "SELECT COUNT(*) FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll()[0]['COUNT(*)'];
+
+  return $result;
+}
+
 function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
 {
   $modal = "modal" . $id;
@@ -81,6 +91,7 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
         <span id='progress_$progress' class='p_label'></span>
         <span id='text_$progress' class='t_label'>
     ";
+  
   $value = (int)$progress;
   if ($value == 1) {
     echo "Not Started";
@@ -91,7 +102,6 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
   if ($value == 3) {
     echo "Completed";
   }
-
 
   echo "</span></div>";
 }
