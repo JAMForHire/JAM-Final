@@ -283,60 +283,57 @@ select {
   height: 2.5em;
 }
 
-/* Jar filling 50% */
-.jar-50 {
-  width: 300px;
-  height: 300px;
-  border: 10px solid #ccc;
-  border-radius: 10px;
-  line-height: 200px;
-  text-align: center;
-  color: #ddd;
-  font-size: 25px;
-  font-weight: 600;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-
+/* Empty jar */
+.jar-0 {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
   cursor: pointer;
 }
 
-/* Jar filling 100% */
-.jar-100 {
-  width: 300px;
-  height: 300px;
-  border: 10px solid #ccc;
-  border-radius: 10px;
-  line-height: 200px;
-  text-align: center;
-  color: #ddd;
-  font-size: 25px;
-  font-weight: 600;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-
+/* Jar filling 50% */
+.jar-50  {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
   cursor: pointer;
 }
 
 /* Animate Jar for 50% */
 .jar-50:before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: purple;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 40%;
-  animation: fill 7s steps(700);
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:purple;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:40%;
+  animation:fill-50 7s steps(700);
   animation-fill-mode: forwards;
   z-index: -1;
 }
 
-/* Fill animation */
-@keyframes fill {
-
+/* Fill animation (50%) */
+@keyframes fill-50 {
   /* Starting position */
   from {
     /* Shift 300px */
@@ -361,24 +358,41 @@ select {
   }
 }
 
+/* Jar filling 100% */
+.jar-100  {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
+
+  cursor: pointer;
+}
+
 /* Jam jar 100% animation before state */
 .jar-100:before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: purple;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 40%;
-  animation: fill2 7s steps(700);
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:purple;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:40%;
+  animation:fill-100 7s steps(700);
   animation-fill-mode: forwards;
   z-index: -1;
 }
 
-/* Fill2 for 100% animation */
-@keyframes fill2 {
-
+/* Fill animation (100%) */
+@keyframes fill-100 {
   /* Starting */
   from {
     /* shift 300px down */
@@ -401,6 +415,22 @@ select {
     transform: translateX(-50%) rotate(360deg);
     border-radius: 0%;
   }
+}
+
+.jar-red:before {
+  background: red;
+}
+
+.jar-black:before {
+  background: black;
+}
+
+.jar-0 h2 {
+  color: black;
+}
+
+.jar-50 h2, .jar-100 h2 {
+  color: white;
 }
 
 /* Footer styling */
@@ -460,6 +490,19 @@ p.copyright {
   height: 75px;
 }
 
+#opportunity-reminder {
+  border: 2px solid black;
+  width: 50%;
+  height: 12vh;
+  z-index: 9;
+  position: absolute;
+  left: 25%;
+  background: rgb(202, 151, 253);
+  color: white;
+  text-align: center;
+  padding: 1vh 0;
+}
+
 ul.jar_table {
   column-count: 3;
 }
@@ -468,10 +511,6 @@ ul.jar_table {
   display: flex;
   flex-wrap: wrap;
 }
-
-/* .jar-row > * {
-  flex: 1 1 30%;
-} */
 
 
 .p_label {

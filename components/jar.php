@@ -16,13 +16,36 @@ function get_num_jars($conn, $user_id)
   $stmt->execute(['user_id' => $user_id]);
   $result = $stmt->fetchAll()[0]['COUNT(*)'];
 
-  return $result;
-}
+  function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
+    $modal = "modal" . $id;
+    $selected = ["", "", "", ""];
+    $jar_progress = "jar-0";
 
-function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
-{
-  $modal = "modal" . $id;
-  echo "
+    if($progress == 1)$selected[1] = "selected";
+    else if($progress == 2) {
+      $selected[2] = "selected";
+      $jar_progress = "jar-50";
+    }
+    else if($progress == 3) {
+      $selected[3] = "selected";
+      $jar_progress = "jar-100";
+    }
+    else $selected[0] = "selected";
+
+    $jar_color = "";
+    $jar_due_date_status = "";
+
+    $days_till_due = (strtotime($date) - time()) / (60*60*24);
+    if($days_till_due < 3) {
+      $jar_color = "jar-red";
+      $jar_due_date_status = "ALMOST DUE";
+    }
+    if($days_till_due < 0) {
+      $jar_color = "jar-black";
+      $jar_due_date_status = "EXPIRED";
+    }
+
+    echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
           <!-- Main Modal Content -->
@@ -68,10 +91,10 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
                   <select id='progress' name='progress'
                     class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
                     required>
-                    <option selected value='$progress'>Choose...</option>
-                    <option value='1'>Not Started</option>
-                    <option value='2'>In Progress</option>
-                    <option value='3'>Completed</option>
+                    <option $selected[0] value='$progress'>Choose...</option>
+                    <option $selected[1] value='1'>Not Started</option>
+                    <option $selected[2] value='2'>In Progress</option>
+                    <option $selected[3] value='3'>Completed</option>
                   </select>
                 </div>
                 <div class='modal-footer'>
@@ -86,10 +109,9 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
         </div>
       </div>
 
-      <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
-        $name       
-        <span id='progress_$progress' class='p_label'></span>
-        <span id='text_$progress' class='t_label'>
+      <div id='jar_$id' class='jar $jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
+        $name<h2>$jar_due_date_status</h2>
+      </div>
     ";
   
   $value = (int)$progress;
