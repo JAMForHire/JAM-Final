@@ -1,23 +1,20 @@
 <?php 
-  function get_jars($conn) {
-    $sql = "SELECT * FROM jars";
-    $query = $conn->query($sql);
-    $result = $query->fetchAll();
+  function get_jars($conn, $user_id) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['user_id' => $user_id]);
+    $result = $stmt->fetchAll();
 
     return $result;
   }
 
-  function render_jar($id, $name, $date, $notes, $link, $progress) {
+  function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
     echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
           <!-- Main Modal Content -->
           <div class='modal-content'>
-            <div class='modal-header border-0'>
-              <!-- Heading -->
-              <h5 class='modal-title' id='modalTitle'>JAM Jar</h5>
-            </div>
             <!-- Body text -->
             <div class='modal-body'>
               <h1 class='text-center mb-4'>$name</h1>
@@ -66,6 +63,7 @@
                   </select>
                 </div>
                 <div class='modal-footer'>
+                  <input type='submit' name='delete' value='Delete' class='btn btn-danger' />
                   <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                   <input type='submit' class='btn btn-primary' />
                 </div>
@@ -76,7 +74,7 @@
         </div>
       </div>
 
-      <div id='jar_$id' class='jar-50' data-toggle='modal' data-target='#$modal'>
+      <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
         $name
       </div>
     ";

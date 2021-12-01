@@ -447,3 +447,16 @@ p.copyright {
   width: 75px;
   height: 75px;
 }
+
+ul.jar_table {
+  column-count: 3;
+}
+
+.jar-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* .jar-row > * {
+  flex: 1 1 30%;
+} */
