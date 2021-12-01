@@ -114,8 +114,8 @@ else {
         <!-- Individual Section -->
         <div class="col-sm">
           <img class="main_img" src="./Resources/assets/undraw_organize.svg" alt="organized" />
-          <h3>Stay Organized</h3>
-          <div>
+          <h3 class="text-white">Stay Organized</h3>
+          <div class="text-white">
             JAM will help organize all your Opportunities for you 
             and can hold information about those specific opportunities.
           </div>
@@ -123,8 +123,8 @@ else {
         <!-- Individual Section -->
         <div class="col-sm">
           <img class="main_img" src="./Resources/assets/undraw_time.svg" alt="organized" />
-          <h3>Time is Key</h3>
-          <div>
+          <h3 class="text-white">Time is Key</h3>
+          <div class="text-white">
             JAM reminds the user when an application is going to be 
             overdue or has not been started if it is getting close to the
             application deadline.
@@ -133,8 +133,8 @@ else {
         <!-- Individual Section -->
         <div class="col-sm">
           <img class="main_img_2" src="./Resources/assets/undraw_growth.svg" alt="organized" />
-          <h3>Maximize Potential</h3>
-          <div>
+          <h3 class="text-white">Maximize Potential</h3>
+          <div class="text-white">
             With using JAM with all of their reminders, it keeps the user
             on track and makes sure they can complete as many applications
             as they would like to before their due dates.
@@ -148,9 +148,15 @@ else {
   <section class="d-flex flex-column align-items-center my-5">
     <h2 class="display-6 mb-5">Join Today!</h2>
     <!-- Button row -->
-    <div class="mt-1 mb-5 d-flex h-100 w-100 justify-content-center gap-5">
-      <button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./login.php')">Login</button>
-      <button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./register.php')">Register</button>
+    <div class="d-flex mt-1 mb-5 h-100 w-100 gap-5 justify-content-center">
+      <div class="d-flex flex-column align-items-center">
+        <img src="/Resources/assets/undraw_login.svg" class="main_img" />
+        <div><button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./login.php')">Login</button></div>
+      </div>
+      <div class="d-flex flex-column align-items-center">
+        <img src="/Resources/assets/undraw_add_user.svg" class="main_img_2" />
+        <div><button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./register.php')">Register</button></div>
+      </div>
     </div>
   </section>
 
