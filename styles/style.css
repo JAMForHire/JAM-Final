@@ -417,6 +417,14 @@ img.chevron {
   background: black;
 }
 
+.jar-0 h2 {
+  color: black;
+}
+
+.jar-50 h2, .jar-100 h2 {
+  color: white;
+}
+
 /* Footer styling */
 footer {
   /* Sizing */

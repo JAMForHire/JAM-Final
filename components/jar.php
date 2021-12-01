@@ -23,14 +23,18 @@
       $jar_progress = "jar-100";
     }
     else $selected[0] = "selected";
+
     $jar_color = "";
+    $jar_due_date_status = "";
 
     $days_till_due = (strtotime($date) - time()) / (60*60*24);
     if($days_till_due < 3) {
       $jar_color = "jar-red";
+      $jar_due_date_status = "ALMOST DUE";
     }
     if($days_till_due < 0) {
       $jar_color = "jar-black";
+      $jar_due_date_status = "EXPIRED";
     }
 
     echo "
@@ -97,8 +101,8 @@
         </div>
       </div>
 
-      <div id='jar_$id' class='$jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
-        $name
+      <div id='jar_$id' class='jar $jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
+        $name<h2>$jar_due_date_status</h2>
       </div>
     ";
   }
