@@ -241,7 +241,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
           if ((int)$_SESSION['type'] == 1) {
             echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
             //normal user has a max of 5 if trying to make another one give message
-          } else if ((int)$jar_count > 5) {
+          } else if ((int)$jar_count >= 5) {
             echo '<button type="button" class="bg-transparent border-0" 
                             onclick="upgrade()">';
             //normal user under their 5 opportunities
