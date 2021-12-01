@@ -1,6 +1,5 @@
 <?php
-function get_jars($conn, $user_id)
-{
+function get_jars($conn, $user_id) {
   $sql = "SELECT * FROM jars WHERE user_id=:user_id";
   $stmt = $conn->prepare($sql);
   $stmt->execute(['user_id' => $user_id]);
@@ -9,8 +8,7 @@ function get_jars($conn, $user_id)
   return $result;
 }
 
-function get_num_jars($conn, $user_id)
-{
+function get_num_jars($conn, $user_id) {
   $sql = "SELECT COUNT(*) FROM jars WHERE user_id=:user_id";
   $stmt = $conn->prepare($sql);
   $stmt->execute(['user_id' => $user_id]);
@@ -109,21 +107,23 @@ function get_num_jars($conn, $user_id)
         </div>
       </div>
 
-      <div id='jar_$id' class='jar $jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
-        $name<h2>$jar_due_date_status</h2>
-      </div>
-    ";
-  
-  $value = (int)$progress;
-  if ($value == 1) {
-    echo "Not Started";
-  }
-  if ($value == 2) {
-    echo "In Progress";
-  }
-  if ($value == 3) {
-    echo "Completed";
-  }
+      <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
+      $name       
+      <span id='progress_$progress' class='p_label'></span>
+      <span id='text_$progress' class='t_label'>
+      ";
+    $value = (int)$progress;
+    if ($value == 1) {
+      echo "Not Started";
+    }
+    if ($value == 2) {
+      echo "In Progress";
+    }
+    if ($value == 3) {
+      echo "Completed";
+    }
 
-  echo "</span></div>";
+
+    echo "</span></div>";
+  }
 }
