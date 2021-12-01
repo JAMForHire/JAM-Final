@@ -150,11 +150,11 @@ else {
     <!-- Button row -->
     <div class="d-flex mt-1 mb-5 h-100 w-100 gap-5 justify-content-center">
       <div class="d-flex flex-column align-items-center">
-        <img src="/Resources/assets/undraw_login.svg" class="main_img" />
+        <img src="./Resources/assets/undraw_login.svg" class="main_img" />
         <div><button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./login.php')">Login</button></div>
       </div>
       <div class="d-flex flex-column align-items-center">
-        <img src="/Resources/assets/undraw_add_user.svg" class="main_img_2" />
+        <img src="./Resources/assets/undraw_add_user.svg" class="main_img_2" />
         <div><button type="button" class="btn btn-lg btn-jam text-white" onclick="redirect('./register.php')">Register</button></div>
       </div>
     </div>
