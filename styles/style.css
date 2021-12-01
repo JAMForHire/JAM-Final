@@ -325,6 +325,14 @@ img.chevron {
   z-index:-1;
 }
 
+.jar-red:before {
+  background: red;
+}
+
+.jar-black:before {
+  background: black;
+}
+
 /* Fill animation */
 @keyframes fill {
   /* Starting position */
@@ -446,6 +454,19 @@ p.copyright {
 #profile-overview img {
   width: 75px;
   height: 75px;
+}
+
+#opportunity-reminder {
+  border: 2px solid black;
+  width: 50%;
+  height: 12vh;
+  z-index: 9;
+  position: absolute;
+  left: 25%;
+  background: rgb(202, 151, 253);
+  color: white;
+  text-align: center;
+  padding: 1vh 0;
 }
 
 ul.jar_table {

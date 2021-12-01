@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once('config.php');
+require_once("./components/jar.php");
 
 try {
   $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
@@ -13,6 +14,9 @@ catch(PDOException $e) {
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
 $pfp_src = "Resources/assets/profile.png";
+$opportunity_reminder_style = "\"display: none;\"";
+$close_to_due_style = "\"display: block;\"";
+$overdue_style = "\"display: none;\"";
 
 if(!empty($_SESSION['filepath'])) {
   $pfp_src = $_SESSION['filepath'];
@@ -21,6 +25,33 @@ if(!empty($_SESSION['filepath'])) {
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
   $nav_login_style = "\"display: none;\"";
   $nav_profile_style = "\"display: block;\"";
+
+  $jars = get_jars($db, $_SESSION['user_id']);
+
+  // check for overdue opportunities
+  $close_to_due = 0;
+  foreach($jars as $jar) {
+    $days_till_due = (strtotime($jar['date']) - time()) / (60*60*24);
+    if($days_till_due < 0) {
+      $opportunity_reminder_style = "\"display: block;\"";
+      $close_to_due_style = "\"display: none;\"";
+      $overdue_style = "\"display: block;\"";
+      $close_to_due = 1;
+      break;
+    }
+  }
+  if(!$close_to_due) {
+    // check for close to due opportunities
+    foreach($jars as $jar) {
+      $days_till_due = (strtotime($jar['date']) - time()) / (60*60*24);
+      if($days_till_due < 3) {
+        $opportunity_reminder_style = "\"display: block;\"";
+        $close_to_due_style = "\"display: block;\"";
+        $overdue_style = "\"display: none;\"";
+        break;
+      }
+    }
+  }
 }
 else {
   $nav_login_style = "\"display: block;\"";
@@ -77,6 +108,12 @@ else {
         <input type="submit" name="logout" id="logout" value="Logout"/>
       </form>
     </div>
+  </div>
+
+  <!-- Opportunity Reminder section -->
+  <div id="opportunity-reminder" style=<?php echo $opportunity_reminder_style; ?>>
+    <h4 style=<?php echo $close_to_due_style ?>>Reminder: You have at least one opportunity close to its due date! Check your dashboard now!</h4>
+    <h4 style=<?php echo $overdue_style ?>>Oh no! At least one of your opportunities has expired. Check your dashboard now.</h4>
   </div>
   
   <!-- Hero section -->

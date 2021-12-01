@@ -15,6 +15,16 @@
     else if($progress == 2) $selected[2] = "selected";
     else if($progress == 3) $selected[3] = "selected";
     else $selected[0] = "selected";
+    $jar_color = "";
+
+    $days_till_due = (strtotime($date) - time()) / (60*60*24);
+    if($days_till_due < 3) {
+      $jar_color = "jar-red";
+    }
+    if($days_till_due < 0) {
+      $jar_color = "jar-black";
+    }
+
     echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -79,7 +89,7 @@
         </div>
       </div>
 
-      <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
+      <div id='jar_$id' class='jar-50 $jar_color m-3' data-toggle='modal' data-target='#$modal'>
         $name
       </div>
     ";
