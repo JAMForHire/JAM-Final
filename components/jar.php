@@ -11,9 +11,17 @@
   function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
     $selected = ["", "", "", ""];
-    if($progress == 1) $selected[1] = "selected";
-    else if($progress == 2) $selected[2] = "selected";
-    else if($progress == 3) $selected[3] = "selected";
+    $jar_progress = "jar-0";
+
+    if($progress == 1)$selected[1] = "selected";
+    else if($progress == 2) {
+      $selected[2] = "selected";
+      $jar_progress = "jar-50";
+    }
+    else if($progress == 3) {
+      $selected[3] = "selected";
+      $jar_progress = "jar-100";
+    }
     else $selected[0] = "selected";
     $jar_color = "";
 
@@ -89,7 +97,7 @@
         </div>
       </div>
 
-      <div id='jar_$id' class='jar-50 $jar_color m-3' data-toggle='modal' data-target='#$modal'>
+      <div id='jar_$id' class='$jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
         $name
       </div>
     ";

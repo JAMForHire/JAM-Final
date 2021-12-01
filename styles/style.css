@@ -274,8 +274,8 @@ img.chevron {
   height: 2.5em;
 }
 
-/* Jar filling 50% */
-.jar-50  {
+/* Empty jar */
+.jar-0 {
   width:300px;
   height:300px;
   border:10px solid #ccc;
@@ -292,8 +292,8 @@ img.chevron {
   cursor: pointer;
 }
 
-/* Jar filling 100% */
-.jar-100  {
+/* Jar filling 50% */
+.jar-50  {
   width:300px;
   height:300px;
   border:10px solid #ccc;
@@ -320,21 +320,13 @@ img.chevron {
   left:50%;
   transform:translateX(-50%);
   border-radius:40%;
-  animation:fill 7s steps(700);
+  animation:fill-50 7s steps(700);
   animation-fill-mode: forwards;
   z-index:-1;
 }
 
-.jar-red:before {
-  background: red;
-}
-
-.jar-black:before {
-  background: black;
-}
-
-/* Fill animation */
-@keyframes fill {
+/* Fill animation (50%) */
+@keyframes fill-50 {
   /* Starting position */
   from {
     /* Shift 300px */
@@ -359,6 +351,24 @@ img.chevron {
   }
 }
 
+/* Jar filling 100% */
+.jar-100  {
+  width:300px;
+  height:300px;
+  border:10px solid #ccc;
+  border-radius:10px;
+  line-height:200px;
+  text-align:center;
+  color:#ddd;
+  font-size:25px;
+  font-weight:600;
+  text-transform:uppercase;
+  position:relative;
+  overflow:hidden;
+
+  cursor: pointer;
+}
+
 /* Jam jar 100% animation before state */
 .jar-100:before {
   content:"";
@@ -369,13 +379,13 @@ img.chevron {
   left:50%;
   transform:translateX(-50%);
   border-radius:40%;
-  animation:fill2 7s steps(700);
+  animation:fill-100 7s steps(700);
   animation-fill-mode: forwards;
   z-index:-1;
 }
 
-/* Fill2 for 100% animation */
-@keyframes fill2 {
+/* Fill animation (100%) */
+@keyframes fill-100 {
   /* Starting */
   from {
     /* shift 300px down */
@@ -397,6 +407,14 @@ img.chevron {
     transform:translateX(-50%) rotate(360deg);
     border-radius: 0%;
   }
+}
+
+.jar-red:before {
+  background: red;
+}
+
+.jar-black:before {
+  background: black;
 }
 
 /* Footer styling */
