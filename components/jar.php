@@ -1,16 +1,18 @@
-<?php 
-  function get_jars($conn, $user_id) {
-    $sql = "SELECT * FROM jars WHERE user_id=:user_id";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['user_id' => $user_id]);
-    $result = $stmt->fetchAll();
+<?php
+function get_jars($conn, $user_id)
+{
+  $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll();
 
-    return $result;
-  }
+  return $result;
+}
 
-  function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
-    $modal = "modal" . $id;
-    echo "
+function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
+{
+  $modal = "modal" . $id;
+  echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
           <!-- Main Modal Content -->
@@ -75,8 +77,21 @@
       </div>
 
       <div id='jar_$id' class='jar-50 m-3' data-toggle='modal' data-target='#$modal'>
-        $name
-      </div>
+        $name       
+        <span id='progress_$progress' class='p_label'></span>
+        <span id='text_$progress' class='t_label'>
     ";
+  $value = (int)$progress;
+  if ($value == 1) {
+    echo "Not Started";
   }
-?>
+  if ($value == 2) {
+    echo "In Progress";
+  }
+  if ($value == 3) {
+    echo "Completed";
+  }
+
+
+  echo "</span></div>";
+}
