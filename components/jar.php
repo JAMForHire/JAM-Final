@@ -1,12 +1,20 @@
-<?php 
-  function get_jars($conn, $user_id) {
-    $sql = "SELECT * FROM jars WHERE user_id=:user_id";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['user_id' => $user_id]);
-    $result = $stmt->fetchAll();
+<?php
+function get_jars($conn, $user_id)
+{
+  $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll();
 
-    return $result;
-  }
+  return $result;
+}
+
+function get_num_jars($conn, $user_id)
+{
+  $sql = "SELECT COUNT(*) FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll()[0]['COUNT(*)'];
 
   function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     $modal = "modal" . $id;
@@ -105,5 +113,17 @@
         $name<h2>$jar_due_date_status</h2>
       </div>
     ";
+  
+  $value = (int)$progress;
+  if ($value == 1) {
+    echo "Not Started";
   }
-?>
+  if ($value == 2) {
+    echo "In Progress";
+  }
+  if ($value == 3) {
+    echo "Completed";
+  }
+
+  echo "</span></div>";
+}

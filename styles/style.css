@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre&family=Roboto&display=swap');
 
 /* Html body behavior */
-html, body {
+html,
+body {
   margin: 0px;
   padding: 0px;
 
@@ -82,7 +83,8 @@ img.chevron {
 }
 
 /* Login and register outer box */
-.login, .register {
+.login,
+.register {
   /* flex */
   display: flex;
   justify-content: center;
@@ -105,26 +107,30 @@ img.chevron {
   margin-bottom: 15%;
 }
 
-.login h1, .register h1 {
+.login h1,
+.register h1 {
   font-size: 32px;
 }
 
 /* Login and register headings */
-.login h4, .register h4 {
+.login h4,
+.register h4 {
   /* Shifting */
   margin-bottom: 2%;
   font-size: 20px;
 }
 
 /* Login link styling */
-.login a, .register a {
+.login a,
+.register a {
   /* Text styling */
   color: #55D5FF;
   text-decoration: none;
   font-size: 14px;
 }
 
-.login a:hover, .register a:hover {
+.login a:hover,
+.register a:hover {
   color: #55D5FF;
 }
 
@@ -173,7 +179,10 @@ img.chevron {
 }
 
 /* Styling for Form Input Fields*/
-.login-form input[type=text], input[type=password], input[type=date], select {
+.login-form input[type=text],
+input[type=password],
+input[type=date],
+select {
   width: 100%;
   display: block;
   border: 1px solid #a1a1a1;
@@ -288,7 +297,6 @@ img.chevron {
   text-transform:uppercase;
   position:relative;
   overflow:hidden;
-
   cursor: pointer;
 }
 
@@ -306,7 +314,6 @@ img.chevron {
   text-transform:uppercase;
   position:relative;
   overflow:hidden;
-
   cursor: pointer;
 }
 
@@ -322,7 +329,7 @@ img.chevron {
   border-radius:40%;
   animation:fill-50 7s steps(700);
   animation-fill-mode: forwards;
-  z-index:-1;
+  z-index: -1;
 }
 
 /* Fill animation (50%) */
@@ -331,14 +338,14 @@ img.chevron {
   from {
     /* Shift 300px */
     top: 300px;
-    transform:translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
 
   /* 90% mark */
   90% {
     /* Shift up to 150px (halfway) */
     top: 150px;
-    transform:translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
     border-radius: 40%;
   }
 
@@ -346,7 +353,7 @@ img.chevron {
   100% {
     /* Prevents border radius from showing at complete part of animation */
     top: 150px;
-    transform:translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
     border-radius: 0%;
   }
 }
@@ -381,7 +388,7 @@ img.chevron {
   border-radius:40%;
   animation:fill-100 7s steps(700);
   animation-fill-mode: forwards;
-  z-index:-1;
+  z-index: -1;
 }
 
 /* Fill animation (100%) */
@@ -390,13 +397,14 @@ img.chevron {
   from {
     /* shift 300px down */
     top: 300px;
-    transform:translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
+
   /* 90% progress */
   90% {
     /* Take up entire height */
     top: 0px;
-    transform:translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
     border-radius: 40%;
   }
 
@@ -404,7 +412,7 @@ img.chevron {
   100% {
     /* Prevents border radius from showing at complete part of animation */
     top: 0px;
-    transform:translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
     border-radius: 0%;
   }
 }
@@ -504,6 +512,38 @@ ul.jar_table {
   flex-wrap: wrap;
 }
 
-/* .jar-row > * {
-  flex: 1 1 30%;
-} */
+
+.p_label {
+  position: absolute;
+  margin-top: 250px;
+  margin-left: -50px;
+  padding-bottom: -50%;
+  border-radius: 25px;
+  height: 15px;
+  width: 120px;
+  font-display: hidden;
+
+}
+
+.t_label {
+  position: absolute;
+  margin-top: 158px;
+  border-radius: 25px;
+  margin-left: -30px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: xx-small;
+  color: #ffffff;
+}
+
+#progress_1 {
+  background-color: red;
+}
+
+#progress_2 {
+  background-color: rgb(25, 225, 25);
+}
+
+#progress_3 {
+  background-color: rgb(0, 177, 216);
+}
