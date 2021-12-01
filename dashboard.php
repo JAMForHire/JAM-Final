@@ -45,7 +45,7 @@ try {
       // Updating jar
       else {
         // Prepare sql statement
-        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link progress=:progress WHERE id=:id AND user_id=:user_id";
+        $sql = "UPDATE jars SET company=:name, notes=:notes, link=:link, progress=:progress WHERE id=:id AND user_id=:user_id";
         $stmt = $db->prepare($sql);
 
         // Execute
