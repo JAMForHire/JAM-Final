@@ -445,6 +445,8 @@ footer {
 
   /* Font */
   font-family: 'Roboto', sans-serif;
+
+  margin-bottom: 0;
 }
 
 /* Copyright printing */
@@ -512,7 +514,6 @@ ul.jar_table {
   flex-wrap: wrap;
 }
 
-
 .p_label {
   position: absolute;
   margin-top: 250px;
@@ -522,7 +523,6 @@ ul.jar_table {
   height: 15px;
   width: 120px;
   font-display: hidden;
-
 }
 
 .t_label {
