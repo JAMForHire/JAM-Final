@@ -1,16 +1,26 @@
-<?php 
-  function get_jars($conn, $user_id) {
-    $sql = "SELECT * FROM jars WHERE user_id=:user_id";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['user_id' => $user_id]);
-    $result = $stmt->fetchAll();
+<?php
+function get_jars($conn, $user_id)
+{
+  $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll();
 
-    return $result;
-  }
+  return $result;
+}
+function get_num_jars($conn, $user_id)
+{
+  $sql = "SELECT COUNT(*) FROM jars WHERE user_id=:user_id";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute(['user_id' => $user_id]);
+  $result = $stmt->fetchAll()[0]['COUNT(*)'];
 
-  function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
-    $modal = "modal" . $id;
-    echo "
+  return $result;
+}
+function render_jar($id, $user_id, $name, $date, $notes, $link, $progress)
+{
+  $modal = "modal" . $id;
+  echo "
       <div class='modal fade' id='$modal' tabindex='-1' role='dialog' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
           <!-- Main Modal Content -->
@@ -78,5 +88,4 @@
         $name
       </div>
     ";
-  }
-?>
+}
