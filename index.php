@@ -85,7 +85,7 @@ else {
       <a href="./dashboard.php">Dashboard</a>
       <a href="./login.php" style=<?php echo $nav_login_style; ?>>Login</a>
       <button id="profile-icon-button" onclick="toggleProfile()" style=<?php echo $nav_profile_style; ?>>
-        <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
+        <img class="profile-icon rounded-circle" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
       </button>
     </div>
   </nav>
@@ -93,7 +93,7 @@ else {
   <!-- Profile section -->
   <div id="profile-menu" style="display: none;">
     <div id="profile-overview">
-      <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
+      <img class="profile-icon rounded-circle" src=<?php echo $pfp_src ?> alt="User Profile Picture"/>
       <p><?php echo $_SESSION['username'] ?>'s Profile</p>
     </div>
     <div>
@@ -133,7 +133,7 @@ else {
       </div>
       <!-- Logo -->
       <div class="col-lg-6 d-flex flex-row justify-content-center">
-        <img src="./Resources/assets/logo.png" class="d-block mx-lg-auto img-fluid mb-5" alt="GNH Logo" width="450" height="450">
+        <img src="./Resources/assets/logo.png" class="d-block mx-lg-auto img-fluid mb-5" alt="Logo" width="450" height="450">
       </div>
     </div>
     <!-- Chevron -->
