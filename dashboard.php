@@ -211,7 +211,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
       if ($_SESSION['dob'] != "0000-00-00") echo "<p>Date of Birth: " . $_SESSION['dob'] . "</p>";
       ?>
             <form id="logout-form" method="post" action="logout.php">
-                <input type="submit" name="logout" id="logout" value="Logout" />
+                <input type="submit" class="btn btn-jam" name="logout" id="logout" value="Logout" />
             </form>
         </div>
     </div>

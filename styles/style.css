@@ -480,6 +480,7 @@ p.copyright {
   border: 2px solid black;
   padding: 1vw;
   justify-content: space-around;
+  box-shadow: 3px 3px 10px black;
 }
 
 #profile-overview {
@@ -546,4 +547,8 @@ ul.jar_table {
 
 #progress_3 {
   background-color: rgb(0, 177, 216);
+}
+
+#logout {
+  color: white;
 }
