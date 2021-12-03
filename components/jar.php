@@ -36,7 +36,8 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
   $jar_color = "";
   $jar_due_date_status = "";
 
-  $days_till_due = (strtotime($date) - time()) / (60*60*24);
+  $current_time = time() - 5*60*60;
+  $days_till_due = (strtotime($date) - $current_time) / (60*60*24);
   if($days_till_due < 3) {
     $jar_color = "jar-red";
     $jar_due_date_status = "ALMOST DUE";

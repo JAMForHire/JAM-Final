@@ -31,7 +31,8 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
   // check for overdue opportunities
   $close_to_due = 0;
   foreach($jars as $jar) {
-    $days_till_due = (strtotime($jar['date']) - time()) / (60*60*24);
+    $current_time = time() - 5*60*60;
+    $days_till_due = (strtotime($jar['date']) - $current_time) / (60*60*24);
     if($days_till_due < 0) {
       $opportunity_reminder_style = "\"display: block;\"";
       $close_to_due_style = "\"display: none;\"";
@@ -43,7 +44,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
   if(!$close_to_due) {
     // check for close to due opportunities
     foreach($jars as $jar) {
-      $days_till_due = (strtotime($jar['date']) - time()) / (60*60*24);
+      $days_till_due = (strtotime($jar['date']) - $current_time) / (60*60*24);
       if($days_till_due < 3) {
         $opportunity_reminder_style = "\"display: block;\"";
         $close_to_due_style = "\"display: block;\"";
