@@ -1,11 +1,21 @@
 <?php
-function get_jars($conn, $user_id)
+function get_jars($conn, $user_id, $sortby)
 {
-  $sql = "SELECT * FROM jars WHERE user_id=:user_id";
+  if($sortby == 0) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY date ASC";
+  }
+
+  else if($sortby == 1) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY progress ASC";
+  }
+
+  else {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY company ASC";
+  }
+
   $stmt = $conn->prepare($sql);
   $stmt->execute(['user_id' => $user_id]);
   $result = $stmt->fetchAll();
-
   return $result;
 }
 
@@ -125,7 +135,7 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
     </div>
 
     <div id='jar_$id' class='$jar_progress $jar_color m-3' data-toggle='modal' data-target='#$modal'>
-      $name       
+      $name
       <span id='progress_$progress' class='p_label'>$progress_label_text</span>
       <span id='text_$progress' class='t_label'>$progress_label_text</span>
       <h2>$jar_due_date_status</h2>
