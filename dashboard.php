@@ -122,7 +122,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
             <div class='modal-content'>
                 <div class='modal-header border-0'>
                     <!-- Heading -->
-                    <h5 class='modal-title' id='modalTitle'>JAM Jar</h5>
+                    <h5 class='modal-title' id='modalTitle'>Add Jar</h5>
                 </div>
                 <!-- Body text -->
                 <div class='modal-body'>
@@ -222,11 +222,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <!-- Main content -->
     <div class="d-flex h-90">
         <div class="d-flex flex-column align-items-center flex-shrink-0 p-3 bg-light" style="width: 230px;">
-            <img src=<?php echo $pfp_src ?> class="mt-4 mb-3 pfp" />
+            <p class='pt-5 display-5 text-center'>Welcome</p><img src=<?php echo $pfp_src ?> class="mt-2 mb-3 pfp" />
             <?php
       if (isset($_SESSION['logged_in'])) {
         if (!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
-          echo "<p>" . $_SESSION['fname'] . " " . $_SESSION['lname'] . "</p>";
+          echo "<p class='h3'>" . $_SESSION['fname'] . "</p><p class='h5'>" . $_SESSION['lname'] . "</p>";
         } else echo "<p>" . $_SESSION['username'] . "</p>";
       } else echo "<p style=\"text-align: center\">Log in to access this feature of JAM!</p>";
       ?>
@@ -238,7 +238,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                 <h1 class="h2">Opportunities</h1>
                 <img class="icon" src="#" id="chevron" alt="chevron" />
                 <div class="d-flex justify-content-end w-100 h-25">
-                  <div class="dropdown">
+                  <div class="dropdown mb-1">
                     <button class="btn dropdown-toggle border btn-outline-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                       Sort
                     </button>
