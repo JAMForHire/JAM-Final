@@ -15,7 +15,7 @@ try {
   $user_id = $_SESSION['user_id'];
 
   // Check for post request
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
     // Put into corresponding variables
     $id = $_POST['id'];
     $name = $_POST['company'];
