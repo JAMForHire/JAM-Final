@@ -547,3 +547,12 @@ ul.jar_table {
 #progress_3 {
   background-color: rgb(0, 177, 216);
 }
+.button_rem{
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
