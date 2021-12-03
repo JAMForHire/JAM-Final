@@ -193,7 +193,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
             <a href="./dashboard.php">Dashboard</a>
             <a href="./login.php" style=<?php echo $nav_login_style; ?>>Login</a>
             <button id="profile-icon-button" onclick="toggleProfile()" style=<?php echo $nav_profile_style; ?>>
-                <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture" />
+                <img class="profile-icon rounded-circle" src=<?php echo $pfp_src ?> alt="User Profile Picture" />
             </button>
         </div>
     </nav>
@@ -201,7 +201,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <!-- Profile section -->
     <div id="profile-menu" style="display: none;">
         <div id="profile-overview">
-            <img class="profile-icon" src=<?php echo $pfp_src ?> alt="User Profile Picture" />
+            <img class="profile-icon rounded-circle" src=<?php echo $pfp_src ?> alt="User Profile Picture" />
             <p><?php echo $_SESSION['username'] ?>'s Profile</p>
         </div>
         <div>
@@ -222,7 +222,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <!-- Main content -->
     <div class="d-flex h-90">
         <div class="d-flex flex-column align-items-center flex-shrink-0 p-3 bg-light" style="width: 230px;">
-            <p class='pt-5 display-5 text-center'>Welcome</p><img src=<?php echo $pfp_src ?> class="mt-2 mb-3 pfp" />
+            <p class='pt-5 display-5 text-center'>Welcome</p><img src=<?php echo $pfp_src ?> class="mt-2 mb-3 pfp rounded-circle" />
             <?php
       if (isset($_SESSION['logged_in'])) {
         if (!empty($_SESSION['fname']) || !empty($_SESSION['lname'])) {
