@@ -65,7 +65,7 @@ $sortnum='2';
 if(isset($_POST["sort"])){
   $sortnum=$_POST["sort"];
 }
-$jars = get_jars($db, $user_id,$sortnum);
+$jars = get_jars($db, $user_id, $sortnum);
 $jar_count = get_num_jars($db, $user_id);
 
 $nav_login_style = "\"display: block;\"";

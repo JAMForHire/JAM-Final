@@ -1,11 +1,20 @@
 <?php
-function get_jars($conn, $user_id,$sortby)
+function get_jars($conn, $user_id, $sortby)
 {
-  $sortindex=array('0' =>"date" ,'1'=>"progress",'2'=>"company");
-  echo "$sortindex[$sortby]";
-  $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY :sort DESC";
+  if($sortby == 0) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY date ASC";
+  }
+
+  else if($sortby == 1) {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY progress ASC";
+  }
+
+  else {
+    $sql = "SELECT * FROM jars WHERE user_id=:user_id ORDER BY company ASC";
+  }
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute(['user_id' => $user_id,'sort' => $sortindex[$sortby]]);
+  $stmt->execute(['user_id' => $user_id]);
   $result = $stmt->fetchAll();
   return $result;
 }
