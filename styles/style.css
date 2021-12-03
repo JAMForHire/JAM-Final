@@ -425,11 +425,11 @@ select {
   background: black;
 }
 
-.jar-0 h2 {
+.jar-0, .jar-50 {
   color: black;
 }
 
-.jar-50 h2, .jar-100 h2 {
+.jar-50 h2, .jar-100 {
   color: white;
 }
 
