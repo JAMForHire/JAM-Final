@@ -244,11 +244,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                       Sort
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <from method="POST">
-                      <li><button class="dropdown-item" type="submit" name="sort" value="0">Date</button></li>
-                      <li><button class="dropdown-item" type="submit" name="sort" value="1">Progress</button></li>
-                      <li><button class="dropdown-item" type="submit" name="sort" value="2">Name</button></li>
-                    </from>
+                      <form method="post" action="dashboard.php" id="sortForm">
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="0">Date</button></li>
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="1">Progress</button></li>
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="2">Name</button></li>
+                      </form>
                     </ul>
                   </div>
                     <?php

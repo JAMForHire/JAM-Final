@@ -1,4 +1,4 @@
 <?php
 $db_username = "itws";
-$db_password = "YES";
+$db_password = "Password1!";
 ?>

@@ -26,7 +26,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
   $nav_login_style = "\"display: none;\"";
   $nav_profile_style = "\"display: block;\"";
 
-  $jars = get_jars($db, $_SESSION['user_id']);
+  $jars = get_jars($db, $_SESSION['user_id'], 1);
 
   // check for overdue opportunities
   $close_to_due = 0;
