@@ -17,12 +17,12 @@ try {
   // Check for post request
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
     // Put into corresponding variables
-    $id = $_POST['id'];
-    $name = $_POST['company'];
-    $date = $_POST['date'];
-    $notes = $_POST['notes'];
-    $link = $_POST['link'];
-    $progress = $_POST['progress'];
+    $id = stripslashes(trim(htmlspecialchars($_POST['id'])));
+    $name = stripslashes(trim(htmlspecialchars($_POST['company'])));
+    $date = stripslashes(trim(htmlspecialchars($_POST['date'])));
+    $notes = stripslashes(trim(htmlspecialchars($_POST['notes'])));
+    $link = stripslashes(trim(htmlspecialchars($_POST['link'])));
+    $progress = stripslashes(trim(htmlspecialchars($_POST['progress'])));
 
     // Check if params are set
     if (isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
