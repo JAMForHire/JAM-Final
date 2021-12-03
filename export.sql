@@ -63,7 +63,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `fname`, `lname`, `type`, `filepath`, `dob`) VALUES
 (0, 'username', '$2y$10$Md2KwwqOJ1YhXuzDqqBWQeLy0BQKRtMC5cI3B5drpubStTZs0YL7G', 'john', 'smith', 0, 'uploads/26.png', '2021-11-16'),
-(26, 'jsmith', '$2y$10$FK7cDkrX4Dk5cqf3VSsZ6.76huphIeFP1qUdpOxE8FiIXIs3RJJZ6', 'John', 'Smith', 0, 'uploads/26.jpeg', '2021-12-23');
+(26, 'jsmith', '$2y$10$FK7cDkrX4Dk5cqf3VSsZ6.76huphIeFP1qUdpOxE8FiIXIs3RJJZ6', 'John', 'Smith', 0, 'uploads/26.png', '2021-12-23');
 
 --
 -- Indexes for dumped tables
