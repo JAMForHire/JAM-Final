@@ -15,7 +15,7 @@ try {
   $user_id = $_SESSION['user_id'];
 
   // Check for post request
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
     // Put into corresponding variables
     $id = $_POST['id'];
     $name = $_POST['company'];
@@ -61,8 +61,11 @@ try {
   echo "Failed to connect to JAM database: " . $e->getMessage() . "<br>";
   exit();
 }
-
-$jars = get_jars($db, $user_id);
+$sortnum='2';
+if(isset($_POST["sort"])){
+  $sortnum=$_POST["sort"];
+}
+$jars = get_jars($db, $user_id, $sortnum);
 $jar_count = get_num_jars($db, $user_id);
 
 $nav_login_style = "\"display: block;\"";
@@ -235,13 +238,25 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                 <h1 class="h2">Opportunities</h1>
                 <img class="icon" src="#" id="chevron" alt="chevron" />
                 <div class="d-flex justify-content-end w-100 h-25">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle border btn-outline-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <form method="post" action="dashboard.php" id="sortForm">
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="0">Date</button></li>
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="1">Progress</button></li>
+                        <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="2">Name</button></li>
+                      </form>
+                    </ul>
+                  </div>
                     <?php
-                      //Check if they are a premium user and if they are then they can create a modal          
+                      //Check if they are a premium user and if they are then they can create a modal
                       if ((int)$_SESSION['type'] == 1) {
                         echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
                         //normal user has a max of 5 if trying to make another one give message
                       } else if ((int)$jar_count >= 5) {
-                        echo '<button type="button" class="bg-transparent border-0" 
+                        echo '<button type="button" class="bg-transparent border-0"
                                         onclick="upgrade()">';
                         //normal user under their 5 opportunities
                       } else {
@@ -256,7 +271,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <!-- Jars -->
     <div class="jar-row">
       <!-- Jar -->
-      <?php 
+      <?php
         foreach($jars as $jar) {
           render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
         }
