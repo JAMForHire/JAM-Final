@@ -167,7 +167,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                             <select id='progress' name='progress'
                                 class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
                                 required>
-                                <option selected value='$progress'>Choose...</option>
                                 <option value='1'>Not Started</option>
                                 <option value='2'>In Progress</option>
                                 <option value='3'>Completed</option>
