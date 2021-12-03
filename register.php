@@ -13,13 +13,13 @@ catch(PDOException $e) {
 $register_failed_message = "";
 
 if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") {
-  $fname = $_POST['input-first-name'];
-  $lname = $_POST['input-last-name'];
-  $username = $_POST['input-username'];
-  $dob = $_POST['input-dob'];
-  $pfp = $_FILES['upload-pfp'];
-  $password = $_POST['input-password'];
-  $confirmed_password = $_POST['input-confirm-password'];
+  $fname = stripslashes(trim(htmlspecialchars($_POST['input-first-name'])));
+  $lname = stripslashes(trim(htmlspecialchars($_POST['input-last-name'])));
+  $username = stripslashes(trim(htmlspecialchars($_POST['input-username'])));
+  $dob = stripslashes(trim(htmlspecialchars($_POST['input-dob'])));
+  $pfp = stripslashes(trim(htmlspecialchars($_FILES['upload-pfp'])));
+  $password = stripslashes(trim(htmlspecialchars($_POST['input-password'])));
+  $confirmed_password = stripslashes(trim(htmlspecialchars($_POST['input-confirm-password'])));
 
   $prepared = $db->prepare("SELECT * from users WHERE (username = :username)");
   $prepared->execute(['username' => $username]);

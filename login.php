@@ -27,13 +27,13 @@ if(isset($_POST['login-button']) && $_POST['login-button'] == "Login") {
       $hashed_password = $result[0]['password'];
       if(password_verify($entered_password, $hashed_password)) {
         $_SESSION['logged_in'] = 1;
-        $_SESSION['user_id'] = $result[0]['user_id'];
-        $_SESSION['username'] = $result[0]['username'];
-        $_SESSION['fname'] = $result[0]['fname'];
-        $_SESSION['lname'] = $result[0]['lname'];
-        $_SESSION['type'] = $result[0]['type'];
-        $_SESSION['filepath'] = $result[0]['filepath'];
-        $_SESSION['dob'] = $result[0]['dob'];
+        $_SESSION['user_id'] = stripslashes(trim(htmlspecialchars($result[0]['user_id'])));
+        $_SESSION['username'] = stripslashes(trim(htmlspecialchars($result[0]['username'])));
+        $_SESSION['fname'] = stripslashes(trim(htmlspecialchars($result[0]['fname'])));
+        $_SESSION['lname'] = stripslashes(trim(htmlspecialchars($result[0]['lname'])));
+        $_SESSION['type'] = stripslashes(trim(htmlspecialchars($result[0]['type'])));
+        $_SESSION['filepath'] = stripslashes(trim(htmlspecialchars($result[0]['filepath'])));
+        $_SESSION['dob'] = stripslashes(trim(htmlspecialchars($result[0]['dob'])));
         header("Location: dashboard.php");
         exit();
       }
