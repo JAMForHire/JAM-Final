@@ -42,19 +42,11 @@ try {
         $finish = $stmt->fetchAll();
       }
 
-      // Archiving jar
-      else if (isset($_POST['archive'])) {
-        $sql = "UPDATE jars SET archived = 1 WHERE id=:id";
+      // Adding archived jar to dashboard
+      else if (isset($_POST['unarchive'])) {
+        $sql = "UPDATE jars SET archived = 0 WHERE id=:id";
         $stmt = $db->prepare($sql);
         $stmt->execute(['id' => $id]);
-        $finish = $stmt->fetchAll();
-      }
-
-      // Duplicating jar
-      else if (isset($_POST['duplicate'])) {
-        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name, :notes, :link, :progress)";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
       }
 
@@ -69,7 +61,7 @@ try {
         $finish = $stmt->fetchAll();
       }
 
-      header("Location: dashboard.php");
+      header("Location: archived.php");
       exit();
     }
   }
@@ -81,8 +73,8 @@ $sortnum='2';
 if(isset($_POST["sort"])){
   $sortnum=$_POST["sort"];
 }
-$jars = get_jars($db, $user_id, $sortnum, 0);
-$jar_count = get_num_jars($db, $user_id, 0);
+$jars = get_jars($db, $user_id, $sortnum, 1);
+$jar_count = get_num_jars($db, $user_id, 1);
 
 $nav_login_style = "\"display: block;\"";
 $nav_profile_style = "\"display: none;\"";
@@ -129,79 +121,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
     <script src="./scripts/profile.js" defer></script>
     <script src="./scripts/upgrade.js" defer></script>
     <script src="./scripts/redirect.js" defer></script>
-    <title>JAM Dashboard</title>
+    <title>JAM Archived Opportunities</title>
 </head>
 
 <body>
-    <div class='modal fade' id='modal' tabindex='-1' role='dialog' aria-hidden='true'>
-        <div class='modal-dialog modal-dialog-centered' role='document'>
-            <!-- Main Modal Content -->
-            <div class='modal-content'>
-                <div class='modal-header border-0'>
-                    <!-- Heading -->
-                    <h5 class='modal-title' id='modalTitle'>Add Jar</h5>
-                </div>
-                <!-- Body text -->
-                <div class='modal-body'>
-                    <h1 class='text-center mb-4'>Enter information</h1>
-                    <form method='POST' class=''>
-                        <input type='hidden' name='add' value='add' />
-                        <input type='hidden' name='id' value='id' />
-                        <!-- Company Input -->
-                        <div class='input-group mb-4'>
-                            <div class='input-group-prepend'>
-                                <span class='input-group-text'>Company:</span>
-                            </div>
-                            <input type='text' id='company' name='company' class='form-control'
-                                placeholder='Enter company name' required>
-                        </div>
-                        <!-- Due Date Input -->
-                        <div class='input-group mb-4'>
-                            <div class='input-group-prepend'>
-                                <span class='input-group-text'>Due Date:</span>
-                            </div>
-                            <input type='date' id='date' name='date' class='form-control' placeholder='Enter date'
-                                required>
-                        </div>
-                        <!-- Notes Input -->
-                        <div class='input-group mb-4'>
-                            <div class='input-group-prepend'>
-                                <span class='input-group-text pr-5'>Notes:</span>
-                            </div>
-                            <textarea id='notes' rows='5' name='notes' class='form-control'
-                                placeholder='Enter notes'></textarea>
-                        </div>
-                        <!-- Application Link Input -->
-                        <div class='input-group mb-4'>
-                            <div class='input-group-prepend'>
-                                <span class='input-group-text'>Link:</span>
-                            </div>
-                            <input type='text' id='app_link' name='link' class='form-control' placeholder='Enter link'
-                                required>
-                        </div>
-                        <!-- Progress Selection -->
-                        <div class='input-group mb-4'>
-                            <div class='input-group-append'>
-                                <label class='input-group-text' for='progress'>Progress:</label>
-                            </div>
-                            <select id='progress' name='progress'
-                                class='form-control custom-select text-left border-secondary border border-1 rounded text-secondary'
-                                required>
-                                <option value='1'>Not Started</option>
-                                <option value='2'>In Progress</option>
-                                <option value='3'>Completed</option>
-                            </select>
-                        </div>
-                        <div class='modal-footer'>
-                            <input type='submit' class='btn btn-primary' />
-                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Buttons for closing -->
-            </div>
-        </div>
-    </div>
     <!-- Navbar -->
     <nav>
         <a class="active" href="./index.php">Home</a>
@@ -251,38 +174,23 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         <div class="d-flex flex-column p-3">
             <div
                 class="mt-4 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <!-- Opportunities Section -->
-                <h1 class="h2" id="dashboard-title">Opportunities</h1>
-                <img class="icon dashboard-chevron1" src="#" id="chevron" alt="chevron" />
-                <div class="d-flex justify-content-end w-100 h-100">
+                <!-- Archived Opportunities Section -->
+                <h1 class="h2" id="dashboard-title">Archived Opportunities</h1>
+                <img class="icon dashboard-chevron2" src="#" id="chevron" alt="chevron" />
+                <div class="d-flex justify-content-end w-100 h-50">
                   <div class="dropdown mb-1">
                     <button class="btn dropdown-toggle border btn-outline-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                       Sort
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <form method="post" action="dashboard.php" id="sortForm">
+                      <form method="post" action="archived.php" id="sortForm">
                         <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="0">Date</button></li>
                         <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="1">Progress</button></li>
                         <li><button class="dropdown-item" type="submit" form="sortForm" name="sort" value="2">Name</button></li>
                       </form>
                     </ul>
                   </div>
-                    <?php
-                      //Check if they are a premium user and if they are then they can create a modal
-                      if ((int)$_SESSION['type'] == 1) {
-                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
-                        //normal user has a max of 5 if trying to make another one give message
-                      } else if ((int)$jar_count >= 5) {
-                        echo '<button type="button" class="bg-transparent border-0"
-                                        onclick="upgrade()">';
-                        //normal user under their 5 opportunities
-                      } else {
-                        echo '<button type="button" class="bg-transparent border-0" data-toggle="modal" data-target="#modal">';
-                      }
-                    ?>
-                    <img class="icon" src="./Resources/assets/add.svg" alt="add" />
-                    </button>
-                    <button type="button" class="btn btn-secondary" id="view-archived" onclick="redirect('archived.php')">View Archived Opportunities</button>
+                  <button type="button" class="btn btn-secondary" id="goto-dashboard" onclick="redirect('dashboard.php')">Return to Dashboard</button>
                 </div>
             </div>
 
@@ -291,7 +199,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
       <!-- Jar -->
       <?php
         foreach($jars as $jar) {
-          render_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
+          render_archived_jar($jar['id'], $user_id, $jar['company'], $jar['date'], $jar['notes'], $jar['link'], $jar['progress']);
         }
       ?>
     </div>
