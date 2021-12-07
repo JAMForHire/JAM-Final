@@ -41,6 +41,13 @@ try {
         $stmt->execute(['id' => $id, 'user_id' => $user_id]);
         $finish = $stmt->fetchAll();
       }
+      // Duplicating jar
+      else if (isset($_POST['duplicate'])) {
+        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name, :notes, :link, :progress)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
+        $finish = $stmt->fetchAll();
+      }
 
       // Updating jar
       else {
