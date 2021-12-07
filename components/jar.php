@@ -125,6 +125,7 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
               <div class='modal-footer'>
                 <input type='submit' name='delete' value='Delete' class='btn btn-danger' />
                 <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                <input type='submit' class='btn btn-dark' name='duplicate' value='Duplicate'/>
                 <input type='submit' class='btn btn-primary' />
               </div>
             </form>
