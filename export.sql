@@ -1,17 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Dec 03, 2021 at 05:52 AM
--- Server version: 5.7.30
--- PHP Version: 7.4.9
+-- Host: 127.0.0.1
+-- Generation Time: Dec 08, 2021 at 04:16 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Database: `JAM`
+-- Database: `jam`
 --
 
 -- --------------------------------------------------------
@@ -27,18 +34,22 @@ CREATE TABLE `jars` (
   `date` date NOT NULL,
   `notes` text NOT NULL,
   `link` text NOT NULL,
-  `progress` int(1) NOT NULL
+  `progress` int(1) NOT NULL,
+  `archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jars`
 --
 
-INSERT INTO `jars` (`id`, `user_id`, `company`, `date`, `notes`, `link`, `progress`) VALUES
-(7, 0, 'Google', '2021-12-06', 'Internship at Google', 'https://careers.google.com/students/', 3),
-(8, 0, 'Amazon', '2021-12-14', 'Job opportunity at AWS', 'https://www.amazon.jobs/en/teams/internships-for-students', 2),
-(9, 26, 'Google', '2021-12-07', 'Google internship opportunity\r\n- Finished first round interview', 'https://careers.google.com/students/', 2),
-(10, 26, 'Amazon', '2021-12-22', 'Amazon full time position', 'https://www.amazon.jobs/en/teams/internships-for-students', 3);
+INSERT INTO `jars` (`id`, `user_id`, `company`, `date`, `notes`, `link`, `progress`, `archived`) VALUES
+(7, 0, 'Google', '2021-12-06', 'Internship at Google', 'https://careers.google.com/students/', 3, 0),
+(8, 0, 'Amazon', '2021-12-14', 'Job opportunity at AWS', 'https://www.amazon.jobs/en/teams/internships-for-students', 2, 0),
+(9, 26, 'Google', '2021-12-09', 'Google internship opportunity\r\n- Finished first round interview', 'https://careers.google.com/students/', 2, 0),
+(10, 26, 'Amazon', '2021-12-22', 'Amazon full time position', 'https://www.amazon.jobs/en/teams/internships-for-students', 3, 0),
+(15, 26, 'Amazon', '2021-12-22', 'Amazon full time position', 'https://www.amazon.jobs/en/teams/internships-for-students', 3, 1),
+(20, 26, 'Amazon', '2021-12-22', 'Amazon full time position', 'https://www.amazon.jobs/en/teams/internships-for-students', 3, 1),
+(21, 26, 'Amazon', '2021-12-22', 'Amazon full time position', 'https://www.amazon.jobs/en/teams/internships-for-students', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +101,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `jars`
 --
 ALTER TABLE `jars`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -107,3 +118,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `jars`
   ADD CONSTRAINT `jars_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
