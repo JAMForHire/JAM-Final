@@ -247,6 +247,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         } else echo "<p>" . $_SESSION['username'] . "</p>";
       } else echo "<p style=\"text-align: center\">Log in to access this feature of JAM!</p>";
       ?>
+        <img class="upload" src="/Resources/assets/upload.png" alt="resume" />
+        <button class="btn btn-jam mt-4 text-white">Resume</button>
         </div>
         <div class="d-flex flex-column p-3">
             <div
