@@ -1,12 +1,24 @@
 <?php
+session_start();
 
 if($_SESSION['resume']) {
-  header("Content-Disposition: attachment;filename={$_SESSION['resume']}");
-  header("Content-Transfer-Encoding: binary"); 
-  header('Pragma: no-cache'); 
+  $file = $_SESSION['resume'];
+
+if (file_exists($file)) {
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="'.basename($file).'"');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($file));
+    readfile($file);
+}
+header("location: dashboard.php");
 }
 
 else {
   header("location: dashboard.php");
 }
+
 ?>
