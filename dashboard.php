@@ -21,7 +21,10 @@ try {
     }
     $pfp = $_FILES['upload-pfp'];
     @$file_ext = strtolower(end(explode('.', $pfp['name'])));
+
     $file_tmp = $pfp['tmp_name'];
+    echo $file_tmp;
+
     $file_name = $user_id . '.' . $file_ext;
     move_uploaded_file($file_tmp,"Resumes/".$file_name);
     $prepared = $db->prepare("UPDATE users SET resume = :res WHERE user_id = :user_id;");
@@ -276,7 +279,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         $stmt->execute(['user_id' => $_SESSION['user_id']]);
         $finish = $stmt->fetchAll();
         if(!empty($finish[0]['resume'])){
-          $_SESSION['resume']=$finish[0]['resume'];
+          $_SESSION['resume'] = $finish[0]['resume'];
           echo "<img class=\"upload\" src=\"Resources/assets/undraw_resume.svg\" alt=\"resume upload\" onclick=\"location.href='download.php'\"/>";
         }
         echo '<form class="login-form" method="POST" action="dashboard.php" enctype="multipart/form-data">';
