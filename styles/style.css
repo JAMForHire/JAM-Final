@@ -562,3 +562,12 @@ ul.jar_table {
 	cursor: pointer;
 	outline: inherit;
 }
+
+.resume {
+  width: 60%;
+}
+
+.upload {
+  padding-top: 10%;
+  width: 30%;
+}

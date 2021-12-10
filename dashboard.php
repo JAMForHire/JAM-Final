@@ -14,8 +14,31 @@ try {
   $db = new PDO('mysql:host=localhost;dbname=JAM', $db_username, $db_password);
   $user_id = $_SESSION['user_id'];
 
+  //stripslashes(trim(htmlspecialchars($_FILES['upload-pfp'])));
+  if(!empty($_FILES['upload-pfp']['name'])){
+    if(isset($_SESSION['resume']) && file_exists($_SESSION['resume'])){
+      unlink($_SESSION['resume']);
+    }
+    $pfp = $_FILES['upload-pfp'];
+    @$file_ext = strtolower(end(explode('.', $pfp['name'])));
+
+    $file_tmp = $pfp['tmp_name'];
+
+    $file_name = $user_id . '.' . $file_ext;
+    move_uploaded_file($file_tmp,"Resumes/".$file_name);
+    $prepared = $db->prepare("UPDATE users SET resume = :res WHERE user_id = :user_id;");
+    $prepared->execute(['res' =>"Resumes/".$file_name , 'user_id' => $_SESSION['user_id']]);
+    unset($_FILES['upload-pfp']);
+    ?>
+    <script>
+    if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
+      </script>
+    <?php
+  }
   // Check for post request
-  if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
+  else if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
     // Put into corresponding variables
     $id = stripslashes(trim(htmlspecialchars($_POST['id'])));
     $name = stripslashes(trim(htmlspecialchars($_POST['company'])));
@@ -125,6 +148,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="./scripts/generate_model.js" defer></script>
+    <script src="./scripts/file_upload.js" defer></script>
     <script src="./scripts/chevron.js" defer></script>
     <script src="./scripts/profile.js" defer></script>
     <script src="./scripts/upgrade.js" defer></script>
@@ -247,6 +271,25 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         } else echo "<p>" . $_SESSION['username'] . "</p>";
       } else echo "<p style=\"text-align: center\">Log in to access this feature of JAM!</p>";
       ?>
+
+        <?php
+        $resume ="SELECT 	resume FROM users WHERE user_id=:user_id";
+        $stmt = $db->prepare($resume);
+        $stmt->execute(['user_id' => $_SESSION['user_id']]);
+        $finish = $stmt->fetchAll();
+        if(!empty($finish[0]['resume'])){
+          $_SESSION['resume'] = $finish[0]['resume'];
+          echo "<img class=\"resume\" src=\"Resources/assets/undraw_resume.svg\" alt=\"resume upload\" onclick=\"location.href='download.php'\"/>";
+          echo "<button onclick=\"location.href='download.php'\" class=\"mt-4 text-white btn btn-jam\">Download Resume</button>";
+        }
+        echo '<form class="login-form" method="POST" action="dashboard.php" enctype="multipart/form-data">';
+        echo '<input type="file" name="upload-pfp" id="fileid" onchange="this.form.submit()" hidden/>';
+        echo "<div class=\"d-flex flex-column align-items-center\">";
+        echo "<img class=\"upload mt-4\" id=\"upload\" src=\"Resources/assets/upload.png\" alt=\"resume upload\" />";
+        echo "<p class=\"h-4\">Click icon to upload</p>";
+        echo "</div>";
+        echo '</form>';
+        ?>
         </div>
         <div class="d-flex flex-column p-3">
             <div
