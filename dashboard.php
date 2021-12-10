@@ -27,6 +27,13 @@ try {
     $prepared = $db->prepare("UPDATE users SET resume = :res WHERE user_id = :user_id;");
     $prepared->execute(['res' =>"Resumes/".$file_name , 'user_id' => $_SESSION['user_id']]);
     unset($_FILES['upload-pfp']);
+    ?>
+    <script>
+    if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
+      </script>
+    <?php
   }
   // Check for post request
   else if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
