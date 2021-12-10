@@ -51,7 +51,7 @@ try {
     if (isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
       // If inserting jar
       if (isset($_POST['add'])) {
-        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
+        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archived) VALUES (:user_id, :date, :name,:notes,:link,:progress, 0)";
         $stmt = $db->prepare($sql);
         $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
