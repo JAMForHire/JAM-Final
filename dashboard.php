@@ -183,7 +183,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                                 <span class='input-group-text'>Company:</span>
                             </div>
                             <input type='text' id='company' name='company' class='form-control'
-                                placeholder='Enter company name' required>
+                                placeholder='Enter company name' maxlength="50" required>
                         </div>
                         <!-- Due Date Input -->
                         <div class='input-group mb-4'>
@@ -191,7 +191,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                                 <span class='input-group-text'>Due Date:</span>
                             </div>
                             <input type='date' id='date' name='date' class='form-control' placeholder='Enter date'
-                                required>
+                                rmaxlength="50" equired>
                         </div>
                         <!-- Notes Input -->
                         <div class='input-group mb-4'>
@@ -199,7 +199,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                                 <span class='input-group-text pr-5'>Notes:</span>
                             </div>
                             <textarea id='notes' rows='5' name='notes' class='form-control'
-                                placeholder='Enter notes'></textarea>
+                              maxlength="250" placeholder='Enter notes'></textarea>
                         </div>
                         <!-- Application Link Input -->
                         <div class='input-group mb-4'>
@@ -207,7 +207,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                                 <span class='input-group-text'>Link:</span>
                             </div>
                             <input type='text' id='app_link' name='link' class='form-control' placeholder='Enter link'
-                                required>
+                            maxlength="50" required>
                         </div>
                         <!-- Progress Selection -->
                         <div class='input-group mb-4'>
