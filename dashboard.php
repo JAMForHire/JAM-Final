@@ -23,7 +23,6 @@ try {
     @$file_ext = strtolower(end(explode('.', $pfp['name'])));
 
     $file_tmp = $pfp['tmp_name'];
-    echo $file_tmp;
 
     $file_name = $user_id . '.' . $file_ext;
     move_uploaded_file($file_tmp,"Resumes/".$file_name);
@@ -280,13 +279,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         $finish = $stmt->fetchAll();
         if(!empty($finish[0]['resume'])){
           $_SESSION['resume'] = $finish[0]['resume'];
-          echo "<img class=\"upload\" src=\"Resources/assets/undraw_resume.svg\" alt=\"resume upload\" onclick=\"location.href='download.php'\"/>";
+          echo "<img class=\"resume\" src=\"Resources/assets/undraw_resume.svg\" alt=\"resume upload\" onclick=\"location.href='download.php'\"/>";
+          echo "<button onclick=\"location.href='download.php'\" class=\"mt-4 text-white btn btn-jam\">Download Resume</button>";
         }
         echo '<form class="login-form" method="POST" action="dashboard.php" enctype="multipart/form-data">';
         echo '<input type="file" name="upload-pfp" id="fileid" onchange="this.form.submit()" hidden/>';
+        echo "<div class=\"d-flex flex-column align-items-center\">";
+        echo "<img class=\"upload mt-4\" id=\"upload\" src=\"Resources/assets/upload.png\" alt=\"resume upload\" />";
+        echo "<p class=\"h-4\">Click icon to upload</p>";
+        echo "</div>";
         echo '</form>';
-        echo "<img class=\"upload\" id=\"upload\" src=\"Resources/assets/upload.png\" alt=\"resume upload\" />";
-
         ?>
         </div>
         <div class="d-flex flex-column p-3">
