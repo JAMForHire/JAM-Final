@@ -51,7 +51,7 @@ try {
     if (isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
       // If inserting jar
       if (isset($_POST['add'])) {
-        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name,:notes,:link,:progress)";
+        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archived) VALUES (:user_id, :date, :name,:notes,:link,:progress, 0)";
         $stmt = $db->prepare($sql);
         $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
         $finish = $stmt->fetchAll();
@@ -75,10 +75,16 @@ try {
 
       // Duplicating jar
       else if (isset($_POST['duplicate'])) {
-        $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name, :notes, :link, :progress)";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
-        $finish = $stmt->fetchAll();
+        $jar_count = get_num_jars($db, $user_id, 0);
+        if($jar_count >= 5) {
+          echo "<script>upgrade();</script>";
+        }
+        else {
+          $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name, :notes, :link, :progress)";
+          $stmt = $db->prepare($sql);
+          $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
+          $finish = $stmt->fetchAll();
+        }
       }
 
       // Updating jar

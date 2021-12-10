@@ -25,6 +25,7 @@ function get_num_jars($conn, $user_id, $archived)
   $stmt = $conn->prepare($sql);
   $stmt->execute(['user_id' => $user_id, 'archived' => $archived]);
   $result = $stmt->fetchAll()[0]['COUNT(*)'];
+  return $result;
 }
 
 function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {

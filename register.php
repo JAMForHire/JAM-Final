@@ -17,10 +17,10 @@ if(isset($_POST['register-button']) && $_POST['register-button'] == "Register") 
   $lname = stripslashes(trim(htmlspecialchars($_POST['input-last-name'])));
   $username = stripslashes(trim(htmlspecialchars($_POST['input-username'])));
   $dob = stripslashes(trim(htmlspecialchars($_POST['input-dob'])));
-  $pfp = stripslashes(trim(htmlspecialchars($_FILES['upload-pfp'])));
   $password = stripslashes(trim(htmlspecialchars($_POST['input-password'])));
   $confirmed_password = stripslashes(trim(htmlspecialchars($_POST['input-confirm-password'])));
-
+  $pfp = $_FILES['upload-pfp'];
+  
   $prepared = $db->prepare("SELECT * from users WHERE (username = :username)");
   $prepared->execute(['username' => $username]);
   $result = $prepared->fetchAll();
