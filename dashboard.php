@@ -80,7 +80,7 @@ try {
           echo "<script>upgrade();</script>";
         }
         else {
-          $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archive) VALUES (:user_id, :date, :name, :notes, :link, :progress, 0)";
+          $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archived) VALUES (:user_id, :date, :name, :notes, :link, :progress, 0)";
           $stmt = $db->prepare($sql);
           $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
           echo $user_id . "<br />";
