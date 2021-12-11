@@ -11,3 +11,9 @@ Default user credentials:
 username: jsmith
 password: JAMIsGreat1!
 ```
+
+## Things added after presentation:
+* Archive and unarchive jars
+* Duplicate jars
+* Ability to add resume to profile
+* Input box character limits
