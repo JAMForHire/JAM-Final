@@ -76,7 +76,7 @@ try {
       // Duplicating jar
       else if (isset($_POST['duplicate'])) {
         $jar_count = get_num_jars($db, $user_id, 0);
-        if($jar_count >= 5) {
+        if($jar_count >= 5 && $_SESSION['type'] == 0) {
           echo "<script>upgrade();</script>";
         }
         else {
