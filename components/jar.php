@@ -86,28 +86,28 @@ function render_jar($id, $user_id, $name, $date, $notes, $link, $progress) {
                 <div class='input-group-prepend'>
                   <span class='input-group-text'>Company:</span>
                 </div>
-                <input type='text' id='company' name='company' class='form-control' value='$name' required>
+                <input maxlength=\"50\" type='text' id='company' name='company' class='form-control' value='$name' required>
               </div>
               <!-- Due Date Input -->
               <div class='input-group mb-4'>
                 <div class='input-group-prepend'>
                   <span class='input-group-text'>Due Date:</span>
                 </div>
-                <input type='date' id='date' name='date' class='form-control' value='$date' required>
+                <input maxlength=\"50\" type='date' id='date' name='date' class='form-control' value='$date' required>
               </div>
               <!-- Notes Input -->
               <div class='input-group mb-4'>
                 <div class='input-group-prepend'>
                   <span class='input-group-text pr-5'>Notes:</span>
                 </div>
-                <textarea id='notes' rows='5' name='notes' class='form-control'>$notes</textarea>
+                <textarea maxlength=\"250\" id='notes' rows='5' name='notes' class='form-control'>$notes</textarea>
               </div>
               <!-- Application Link Input -->
               <div class='input-group mb-4'>
                 <div class='input-group-prepend'>
                   <span class='input-group-text'>Link:</span>
                 </div>
-                <input type='text' id='app_link' name='link' class='form-control' value='$link' required>
+                <input maxlength=\"50\" type='text' id='app_link' name='link' class='form-control' value='$link' required>
               </div>
               <!-- Progress Selection -->
               <div class='input-group mb-4'>
