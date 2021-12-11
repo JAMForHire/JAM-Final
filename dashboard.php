@@ -292,7 +292,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         echo '<input type="file" name="upload-pfp" id="fileid" onchange="this.form.submit()" hidden/>';
         echo "<div class=\"d-flex flex-column align-items-center\">";
         echo "<img class=\"upload mt-4\" id=\"upload\" src=\"Resources/assets/upload.png\" alt=\"resume upload\" />";
-        echo "<p class=\"h-4\">Click icon to upload</p>";
+        echo "<p class=\"h-4\">Click icon to upload resume</p>";
         echo "</div>";
         echo '</form>';
         ?>
