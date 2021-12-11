@@ -39,16 +39,16 @@ try {
   }
   // Check for post request
   else if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['sort'])) {
-    // Put into corresponding variables
-    $id = stripslashes(trim(htmlspecialchars($_POST['id'])));
-    $name = stripslashes(trim(htmlspecialchars($_POST['company'])));
-    $date = stripslashes(trim(htmlspecialchars($_POST['date'])));
-    $notes = stripslashes(trim(htmlspecialchars($_POST['notes'])));
-    $link = stripslashes(trim(htmlspecialchars($_POST['link'])));
-    $progress = stripslashes(trim(htmlspecialchars($_POST['progress'])));
-
     // Check if params are set
     if (isset($_POST['id']) && isset($_POST['company']) && isset($_POST['date']) && isset($_POST['notes']) && isset($_POST['link']) && isset($_POST['progress'])) {
+      // Put into corresponding variables
+      $id = stripslashes(trim(htmlspecialchars($_POST['id'])));
+      $name = stripslashes(trim(htmlspecialchars($_POST['company'])));
+      $date = stripslashes(trim(htmlspecialchars($_POST['date'])));
+      $notes = stripslashes(trim(htmlspecialchars($_POST['notes'])));
+      $link = stripslashes(trim(htmlspecialchars($_POST['link'])));
+      $progress = stripslashes(trim(htmlspecialchars($_POST['progress'])));
+
       // If inserting jar
       if (isset($_POST['add'])) {
         $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archived) VALUES (:user_id, :date, :name,:notes,:link,:progress, 0)";
@@ -80,9 +80,14 @@ try {
           echo "<script>upgrade();</script>";
         }
         else {
-          $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress) VALUES (:user_id, :date, :name, :notes, :link, :progress)";
+          $sql = "INSERT INTO jars(user_id, date, company, notes, link, progress, archived) VALUES (:user_id, :date, :name, :notes, :link, :progress, 0)";
           $stmt = $db->prepare($sql);
           $stmt->execute(['user_id' => $user_id, 'date' => $date, 'name' => $name, 'notes' => $notes, 'link' => $link, 'progress' => $progress]);
+          echo $user_id . "<br />";
+          echo $name . "<br />";
+          echo $notes . "<br />";
+          echo $link . "<br />";
+          echo $progress . "<br />";
           $finish = $stmt->fetchAll();
         }
       }
@@ -191,7 +196,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
                                 <span class='input-group-text'>Due Date:</span>
                             </div>
                             <input type='date' id='date' name='date' class='form-control' placeholder='Enter date'
-                                rmaxlength="50" equired>
+                                required>
                         </div>
                         <!-- Notes Input -->
                         <div class='input-group mb-4'>
@@ -292,7 +297,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
         echo '<input type="file" name="upload-pfp" id="fileid" onchange="this.form.submit()" hidden/>';
         echo "<div class=\"d-flex flex-column align-items-center\">";
         echo "<img class=\"upload mt-4\" id=\"upload\" src=\"Resources/assets/upload.png\" alt=\"resume upload\" />";
-        echo "<p class=\"h-4\">Click icon to upload resume</p>";
+        echo "<p class=\"h-4 text-center\">Click icon to upload resume</p>";
         echo "</div>";
         echo '</form>';
         ?>
