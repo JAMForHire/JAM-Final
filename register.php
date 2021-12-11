@@ -161,18 +161,18 @@ else {
           <!-- Input First Name -->
           <div>
             <label for="input-first-name">First Name</label>
-            <input type="text" name="input-first-name" id="input-first-name"/>
+            <input maxlength="50" type="text" name="input-first-name" id="input-first-name"/>
           </div>
           <!-- Input Last Name -->
           <div class="fix-margin">
             <label for="input-last-name">Last Name</label>
-            <input type="text" name="input-last-name" id="input-last-name"/>
+            <input maxlength="50" type="text" name="input-last-name" id="input-last-name"/>
           </div>
         </div>
         <!-- Input Username -->
         <div>
           <label for="input-username" class="required">Username</label>
-          <input type="text" name="input-username" id="input-username" required/>
+          <input maxlength="50" type="text" name="input-username" id="input-username" required/>
         </div>
         <div class="inline-fields">
           <!-- Input Date of Birth -->
